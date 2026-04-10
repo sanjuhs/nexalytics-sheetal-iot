@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexalytics DTX — Think Digital | IoT for Manufacturing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0f1b3d;
+  --navy-mid: #162350;
+  --navy-light: #1e3068;
+  --amber: #e8942e;
+  --amber-light: #f4b75a;
+  --amber-glow: rgba(232, 148, 46, 0.15);
+  --white: #ffffff;
+  --off-white: #f4f6fa;
+  --gray-100: #e8ecf2;
+  --gray-200: #c7cdd9;
+  --gray-400: #8891a5;
+  --gray-600: #545d73;
+  --teal: #1a9aaa;
+  --teal-light: #28c4d8;
+  --green: #2ecc71;
+  --section-pad: clamp(60px, 8vw, 120px);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--navy);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== UTILITY ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section-pad { padding: var(--section-pad) 0; }
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(15, 27, 61, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(232, 148, 46, 0.12);
+  transition: all 0.4s ease;
+}
+.nav.scrolled { background: rgba(15, 27, 61, 0.98); box-shadow: 0 4px 40px rgba(0,0,0,0.3); }
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px;
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo img { height: 44px; border-radius: 6px; }
+.nav-logo span {
+  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.15rem;
+  color: var(--white); letter-spacing: 0.5px;
+}
+.nav-logo small { display: block; font-size: 0.6rem; font-weight: 400; color: var(--amber); letter-spacing: 3px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--gray-200); text-decoration: none; font-size: 0.88rem;
+  font-weight: 500; letter-spacing: 0.3px; transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0;
+  height: 2px; background: var(--amber); transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--amber); color: var(--navy); border: none; padding: 10px 24px;
+  border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer;
+  transition: all 0.3s; text-decoration: none;
+}
+.nav-cta:hover { background: var(--amber-light); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(232, 148, 46, 0.4); }
+
+.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  background: var(--navy); overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(232, 148, 46, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(26, 154, 170, 0.06) 0%, transparent 50%),
+    linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy) 100%);
+}
+/* Animated grid */
+.hero-grid {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(232,148,46,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,148,46,0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridDrift 20s linear infinite;
+}
+@keyframes gridDrift { to { transform: translate(60px, 60px); } }
+
+/* Circuit lines decoration */
+.hero-circuit {
+  position: absolute; top: 10%; right: 5%; width: 400px; height: 400px;
+  opacity: 0.06; border: 2px solid var(--amber);
+  border-radius: 50%; animation: circuitPulse 6s ease-in-out infinite;
+}
+.hero-circuit::before {
+  content: ''; position: absolute; top: 15%; left: 15%; right: 15%; bottom: 15%;
+  border: 1px solid var(--teal); border-radius: 50%;
+  animation: circuitPulse 6s ease-in-out infinite reverse;
+}
+@keyframes circuitPulse {
+  0%, 100% { transform: scale(1); opacity: 0.06; }
+  50% { transform: scale(1.05); opacity: 0.12; }
+}
+
+.hero-content {
+  position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;
+  padding: 120px 24px 80px; display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px; align-items: center;
+}
+.hero-text h1 {
+  font-family: 'Outfit', sans-serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 800; line-height: 1.1; color: var(--white); margin-bottom: 8px;
+}
+.hero-text h1 .highlight {
+  background: linear-gradient(135deg, var(--amber), var(--amber-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-tagline {
+  font-family: 'Outfit', sans-serif; font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--amber); font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-desc {
+  font-size: 1.1rem; line-height: 1.7; color: var(--gray-200);
+  max-width: 520px; margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--amber); color: var(--navy); padding: 14px 32px;
+  border-radius: 10px; font-weight: 700; font-size: 0.95rem;
+  text-decoration: none; transition: all 0.3s; border: none; cursor: pointer;
+}
+.btn-primary:hover { background: var(--amber-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232, 148, 46, 0.35); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--white); padding: 14px 32px;
+  border-radius: 10px; font-weight: 600; font-size: 0.95rem;
+  text-decoration: none; transition: all 0.3s; border: 1.5px solid rgba(255,255,255,0.2);
+}
+.btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+
+.hero-visual {
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.hero-logo-wrap {
+  position: relative; width: 340px; height: 340px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-logo-wrap img {
+  width: 260px; height: 260px; object-fit: contain; border-radius: 20px;
+  position: relative; z-index: 2;
+}
+.hero-logo-ring {
+  position: absolute; inset: 0; border: 2px solid rgba(232, 148, 46, 0.2);
+  border-radius: 50%; animation: ringRotate 30s linear infinite;
+}
+.hero-logo-ring::before {
+  content: ''; position: absolute; top: -4px; left: 50%; width: 8px; height: 8px;
+  background: var(--amber); border-radius: 50%; transform: translateX(-50%);
+  box-shadow: 0 0 20px var(--amber);
+}
+.hero-logo-ring:nth-child(2) {
+  inset: -20px; animation-duration: 45s; animation-direction: reverse;
+  border-color: rgba(26, 154, 170, 0.15);
+}
+.hero-logo-ring:nth-child(2)::before { background: var(--teal); box-shadow: 0 0 20px var(--teal); }
+@keyframes ringRotate { to { transform: rotate(360deg); } }
+
+/* Stats bar */
+.hero-stats {
+  position: relative; z-index: 2; max-width: 1200px; margin: -40px auto 0;
+  padding: 0 24px;
+}
+.stats-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(232, 148, 46, 0.1);
+}
+.stat-item {
+  padding: 32px 24px; text-align: center;
+  background: rgba(15, 27, 61, 0.8); backdrop-filter: blur(10px);
+}
+.stat-number {
+  font-family: 'Outfit', sans-serif; font-size: 2rem;
+  font-weight: 800; color: var(--amber); margin-bottom: 4px;
+}
+.stat-label { font-size: 0.82rem; color: var(--gray-200); font-weight: 400; letter-spacing: 0.5px; }
+
+/* ===== ABOUT SECTION ===== */
+.about { background: var(--off-white); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.about-image {
+  position: relative; border-radius: 20px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(15, 27, 61, 0.12);
+}
+.about-image img { width: 100%; display: block; }
+.about-image::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(15, 27, 61, 0.05), transparent);
+}
+.section-label {
+  font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 600;
+  color: var(--amber); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700; line-height: 1.2; color: var(--navy); margin-bottom: 20px;
+}
+.section-desc { font-size: 1.05rem; line-height: 1.75; color: var(--gray-600); margin-bottom: 24px; }
+
+.vision-mission { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+.vm-card {
+  padding: 24px; border-radius: 14px;
+  border: 1px solid var(--gray-100); background: var(--white);
+  transition: all 0.3s;
+}
+.vm-card:hover { border-color: var(--amber); box-shadow: 0 8px 30px var(--amber-glow); transform: translateY(-2px); }
+.vm-card h4 {
+  font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+}
+.vm-card h4 .icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.vm-card h4 .icon.vision-icon { background: var(--amber-glow); }
+.vm-card h4 .icon.mission-icon { background: rgba(26, 154, 170, 0.12); }
+.vm-card p { font-size: 0.88rem; line-height: 1.65; color: var(--gray-600); }
+
+/* ===== WHY NDTX ===== */
+.why-section { background: var(--white); }
+.why-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px;
+}
+.why-card {
+  padding: 36px 28px; border-radius: 16px; text-align: center;
+  background: var(--off-white); border: 1px solid transparent;
+  transition: all 0.4s; position: relative; overflow: hidden;
+}
+.why-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--amber), var(--teal));
+  transform: scaleX(0); transition: transform 0.4s;
+}
+.why-card:hover { border-color: var(--gray-100); background: var(--white); box-shadow: 0 12px 40px rgba(15, 27, 61, 0.08); transform: translateY(-4px); }
+.why-card:hover::before { transform: scaleX(1); }
+.why-icon {
+  width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+}
+.why-icon.icon-1 { background: linear-gradient(135deg, rgba(232,148,46,0.12), rgba(232,148,46,0.05)); }
+.why-icon.icon-2 { background: linear-gradient(135deg, rgba(26,154,170,0.12), rgba(26,154,170,0.05)); }
+.why-icon.icon-3 { background: linear-gradient(135deg, rgba(46,204,113,0.12), rgba(46,204,113,0.05)); }
+.why-icon.icon-4 { background: linear-gradient(135deg, rgba(232,148,46,0.12), rgba(26,154,170,0.05)); }
+.why-card h3 {
+  font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 10px;
+}
+.why-card p { font-size: 0.88rem; line-height: 1.65; color: var(--gray-600); }
+
+/* ===== SOLUTIONS ===== */
+.solutions {
+  background: var(--navy); position: relative; overflow: hidden;
+}
+.solutions-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(232,148,46,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(26,154,170,0.04) 0%, transparent 50%);
+}
+.solutions .section-label { color: var(--amber); }
+.solutions .section-title { color: var(--white); }
+.solutions .section-desc { color: var(--gray-200); }
+
+.solutions-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+}
+.sol-card {
+  padding: 36px 28px; border-radius: 16px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px); transition: all 0.4s;
+}
+.sol-card:hover {
+  background: rgba(255,255,255,0.08); border-color: rgba(232,148,46,0.2);
+  transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.sol-icon {
+  width: 50px; height: 50px; border-radius: 12px; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--amber-glow); font-size: 1.4rem;
+}
+.sol-card h3 {
+  font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--white); margin-bottom: 10px;
+}
+.sol-card p { font-size: 0.88rem; line-height: 1.65; color: var(--gray-400); }
+.sol-card:nth-child(4) .sol-icon,
+.sol-card:nth-child(5) .sol-icon { background: rgba(26,154,170,0.15); }
+.sol-card:nth-child(6) .sol-icon,
+.sol-card:nth-child(7) .sol-icon { background: rgba(46,204,113,0.12); }
+
+/* ===== IOT SECTION ===== */
+.iot-section { background: var(--off-white); }
+.iot-hero-text { text-align: center; max-width: 700px; margin: 0 auto 48px; }
+
+.iot-arch-img {
+  display: block; max-width: 600px; margin: 0 auto 60px;
+  border-radius: 16px; box-shadow: 0 12px 40px rgba(15,27,61,0.1);
+  border: 1px solid var(--gray-100); background: var(--white); padding: 20px;
+}
+.iot-arch-img img { width: 100%; display: block; }
+
+/* EdgeHub features */
+.edgehub-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700; color: var(--navy); text-align: center; margin-bottom: 12px;
+}
+.edgehub-sub {
+  text-align: center; color: var(--gray-600); font-size: 1rem; margin-bottom: 40px;
+}
+.edgehub-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px;
+}
+.eh-card {
+  padding: 28px 24px; background: var(--white); border-radius: 14px;
+  border: 1px solid var(--gray-100); transition: all 0.3s;
+}
+.eh-card:hover { border-color: var(--amber); box-shadow: 0 8px 24px var(--amber-glow); transform: translateY(-3px); }
+.eh-card .eh-icon {
+  width: 44px; height: 44px; border-radius: 10px; margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: var(--amber); font-size: 1.2rem;
+}
+.eh-card h4 { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.eh-card p { font-size: 0.82rem; line-height: 1.6; color: var(--gray-600); }
+
+/* Use cases */
+.usecases-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700; color: var(--navy); text-align: center; margin-bottom: 40px;
+}
+.usecase-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.uc-card {
+  border-radius: 16px; overflow: hidden; background: var(--white);
+  border: 1px solid var(--gray-100); transition: all 0.4s;
+}
+.uc-card:hover { box-shadow: 0 16px 50px rgba(15,27,61,0.12); transform: translateY(-4px); }
+.uc-card-img { height: 180px; overflow: hidden; position: relative; }
+.uc-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.uc-card-img::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+  background: linear-gradient(transparent, rgba(15,27,61,0.06));
+}
+.uc-card-body { padding: 24px; }
+.uc-card-body h4 { font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.uc-card-body p { font-size: 0.85rem; line-height: 1.65; color: var(--gray-600); }
+
+/* ===== AI VISION ===== */
+.ai-vision {
+  background: var(--navy); position: relative; overflow: hidden;
+}
+.ai-vision-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,148,46,0.05) 0%, transparent 60%);
+}
+.ai-vision .section-label { color: var(--amber); }
+.ai-vision .section-title { color: var(--white); }
+.ai-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 48px;
+}
+.ai-images {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.ai-images img {
+  width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
+}
+.ai-images img:first-child { grid-column: 1 / -1; }
+.ai-text-content p { color: var(--gray-200); font-size: 1.05rem; line-height: 1.75; margin-bottom: 20px; }
+.ai-text-content .ai-tag {
+  display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.78rem;
+  font-weight: 600; margin-right: 8px; margin-bottom: 8px;
+  background: rgba(232,148,46,0.1); color: var(--amber); border: 1px solid rgba(232,148,46,0.2);
+}
+
+/* ===== APPLICATIONS ===== */
+.applications { background: var(--white); }
+.app-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px;
+}
+.app-card {
+  padding: 28px 20px; text-align: center; border-radius: 14px;
+  background: var(--off-white); border: 1px solid transparent;
+  transition: all 0.3s;
+}
+.app-card:hover { background: var(--white); border-color: var(--gray-100); box-shadow: 0 8px 30px rgba(15,27,61,0.06); transform: translateY(-3px); }
+.app-icon-wrap {
+  width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  font-size: 1.4rem;
+}
+.app-card h4 { font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+.app-card p { font-size: 0.78rem; color: var(--gray-400); margin-top: 6px; }
+
+/* ===== CONTACT / CTA ===== */
+.cta-section {
+  position: relative; padding: var(--section-pad) 0; overflow: hidden;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+}
+.cta-section::before {
+  content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(232,148,46,0.08), transparent 70%);
+}
+.cta-inner {
+  position: relative; z-index: 2; text-align: center; max-width: 640px; margin: 0 auto;
+}
+.cta-inner .section-title { color: var(--white); margin-bottom: 16px; }
+.cta-inner p { color: var(--gray-200); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
+.cta-link {
+  color: var(--amber); font-size: 1.15rem; font-weight: 700;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.3s;
+}
+.cta-link:hover { color: var(--amber-light); gap: 14px; }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #080e20; padding: 48px 0 28px; border-top: 1px solid rgba(232,148,46,0.08);
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.footer-brand { display: flex; align-items: center; gap: 12px; }
+.footer-brand img { height: 36px; border-radius: 6px; }
+.footer-brand span { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { color: var(--gray-400); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+.footer-links a:hover { color: var(--amber); }
+.footer-copy { width: 100%; text-align: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); }
+.footer-copy p { font-size: 0.78rem; color: var(--gray-400); }
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; text-align: center; padding-top: 140px; }
+  .hero-desc { margin: 0 auto 40px; }
+  .hero-actions { justify-content: center; }
+  .hero-visual { order: -1; }
+  .hero-logo-wrap { width: 240px; height: 240px; }
+  .hero-logo-wrap img { width: 180px; height: 180px; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .solutions-grid { grid-template-columns: repeat(2, 1fr); }
+  .edgehub-grid { grid-template-columns: repeat(2, 1fr); }
+  .usecase-grid { grid-template-columns: 1fr; }
+  .ai-grid { grid-template-columns: 1fr; }
+  .app-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute;
+    top: 72px; left: 0; right: 0; background: var(--navy);
+    padding: 24px; gap: 20px; border-bottom: 1px solid rgba(232,148,46,0.1);
+  }
+  .hero-content { padding-top: 120px; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .solutions-grid { grid-template-columns: 1fr; }
+  .edgehub-grid { grid-template-columns: 1fr; }
+  .app-grid { grid-template-columns: 1fr 1fr; }
+  .vision-mission { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="logo.jpg" alt="Nexalytics DTX Logo">
+      <div>
+        <span>NEXALYTICS DTX</span>
+        <small>Think Digital</small>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#iot">IoT</a></li>
+      <li><a href="#ai-vision">AI Vision</a></li>
+      <li><a href="#applications">Industries</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Contact Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-circuit"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="hero-tagline">Think Digital</p>
+      <h1>Bringing the <span class="highlight">Right Technology</span> to the Right Problem</h1>
+      <p class="hero-desc">Delivering real value through IoT, AI Vision, and Digital Transformation — not just innovation for innovation's sake. Singapore-based with a global outlook.</p>
+      <div class="hero-actions">
+        <a href="#solutions" class="btn-primary">Explore Solutions &#8594;</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-logo-wrap">
+        <div class="hero-logo-ring"></div>
+        <div class="hero-logo-ring"></div>
+        <img src="logo.jpg" alt="Nexalytics DTX">
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-number">IoT</div>
+        <div class="stat-label">Manufacturing Solutions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">AI</div>
+        <div class="stat-label">Vision Safety Systems</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">Edge</div>
+        <div class="stat-label">Computing & Analytics</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">Cloud</div>
+        <div class="stat-label">Digital Transformation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about section-pad" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image fade-up">
+        <img src="team.png" alt="Nexalytics DTX Team">
+      </div>
+      <div class="fade-up">
+        <p class="section-label">About Nexalytics DTX</p>
+        <h2 class="section-title">Demand-Driven Digital Solutions with Measurable Outcomes</h2>
+        <p class="section-desc">Our mission is to deeply understand genuine customer challenges, apply proven technologies where they create the most impact, and deliver demand-driven digital solutions with measurable outcomes and strong return on investment.</p>
+        <div class="vision-mission">
+          <div class="vm-card">
+            <h4><span class="icon vision-icon">&#x1F3AF;</span> Vision</h4>
+            <p>Bringing the right technology to the right problem — delivering real value, not just innovation.</p>
+          </div>
+          <div class="vm-card">
+            <h4><span class="icon mission-icon">&#x1F680;</span> Mission</h4>
+            <p>Deeply understand customer challenges, apply proven tech for maximum impact, and deliver measurable ROI.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY NEXALYTICS ===== -->
+<section class="why-section section-pad" id="why">
+  <div class="container">
+    <div style="text-align:center; max-width:600px; margin:0 auto 16px;">
+      <p class="section-label">Why Choose Us</p>
+      <h2 class="section-title">Why Nexalytics DTX</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <div class="why-icon icon-1">&#x1F4AC;</div>
+        <h3>Business-First Digital Thinking</h3>
+        <p>We start from your business goals and work backward to the right technology — never the other way around.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon icon-2">&#x1F512;</div>
+        <h3>Secure, Scalable Architectures</h3>
+        <p>Enterprise-grade security from edge to cloud, with architectures built to scale as your operations grow.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon icon-3">&#x26A1;</div>
+        <h3>Accelerated Time-to-Value</h3>
+        <p>Rapid deployment with industry-specific accelerators that get your solutions up and running fast.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon icon-4">&#x1F91D;</div>
+        <h3>Advisory-Led Delivery</h3>
+        <p>Expert guidance through every phase — from strategy and design through implementation and optimization.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTIONS ===== -->
+<section class="solutions section-pad" id="solutions">
+  <div class="solutions-bg"></div>
+  <div class="container" style="position:relative; z-index:2;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 16px;">
+      <p class="section-label">Solutions & Skill Set</p>
+      <h2 class="section-title">End-to-End Digital &amp; IoT Capabilities</h2>
+      <p class="section-desc">From cloud platforms to factory floors, our solutions are fine-tuned to address real customer pain points across industries.</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="sol-card fade-up">
+        <div class="sol-icon">&#x2699;</div>
+        <h3>Digital Transformation &amp; Analytics</h3>
+        <p>Modernize operations with data-driven insights, process automation, and digital-first strategies.</p>
+      </div>
+      <div class="sol-card fade-up">
+        <div class="sol-icon">&#x1F4E1;</div>
+        <h3>Domain-Specific AI &amp; IoT Solutions</h3>
+        <p>Purpose-built AI and IoT architectures tailored to manufacturing, logistics, and facility management.</p>
+      </div>
+      <div class="sol-card fade-up">
+        <div class="sol-icon">&#x1F3AF;</div>
+        <h3>Customer Pain Point Solutions</h3>
+        <p>Fine-tuned to address end customer pain points with practical, measurable outcomes.</p>
+      </div>
+      <div class="sol-card fade-up">
+        <div class="sol-icon">&#x1F3ED;</div>
+        <h3>Industry-Specific Accelerators</h3>
+        <p>Pre-built frameworks for semiconductors, electronics, solar, and more — reducing time to deployment.</p>
+      </div>
+      <div class="sol-card fade-up">
+        <div class="sol-icon">&#x2601;</div>
+        <h3>Data, AI &amp; Cloud-Driven Solutions</h3>
+        <p>Leverage cloud infrastructure, edge computing, and AI to unlock actionable intelligence at scale.</p>
+      </div>
+      <div class="sol-card fade-up">
+        <div class="sol-icon">&#x1F310;</div>
+        <h3>Enterprise &amp; Industry-Focused Offerings</h3>
+        <p>Comprehensive solutions designed for enterprise-grade reliability with industry-focused customization.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== IOT FOR MANUFACTURING ===== -->
+<section class="iot-section section-pad" id="iot">
+  <div class="container">
+    <div class="iot-hero-text fade-up">
+      <p class="section-label">IoT for Manufacturing</p>
+      <h2 class="section-title">Smart Manufacturing with Edge Intelligence</h2>
+      <p class="section-desc">End-to-end IoT architecture from perception layer sensors through network gateways to cloud applications — enabling real-time monitoring, control, and analytics.</p>
+    </div>
+
+    <!-- Architecture diagram -->
+    <div class="iot-arch-img fade-up">
+      <img src="iot-architecture.png" alt="Typical IoT Architecture - Application Layer, Network Layer, Perception Layer">
+    </div>
+
+    <!-- EdgeHub Features -->
+    <h3 class="edgehub-title fade-up">EdgeHub Features</h3>
+    <p class="edgehub-sub fade-up">Comprehensive device management from edge to cloud</p>
+    <div class="edgehub-grid">
+      <div class="eh-card fade-up">
+        <div class="eh-icon">&#x1F527;</div>
+        <h4>Streamlined Device Provisioning</h4>
+        <p>Integrates with edge tools like EdgeLink Studio and I/O module utilities to simplify connecting new devices.</p>
+      </div>
+      <div class="eh-card fade-up">
+        <div class="eh-icon">&#x1F4F1;</div>
+        <h4>Remote Monitoring &amp; Control</h4>
+        <p>Real-time monitoring of device status and control capabilities, enabling efficient management from anywhere.</p>
+      </div>
+      <div class="eh-card fade-up">
+        <div class="eh-icon">&#x1F4E4;</div>
+        <h4>Over-the-Air (OTA) Updates</h4>
+        <p>Seamless deployment of firmware and software updates to devices remotely, reducing on-site maintenance cost.</p>
+      </div>
+      <div class="eh-card fade-up">
+        <div class="eh-icon">&#x1F6E1;</div>
+        <h4>Edge-to-Cloud Security</h4>
+        <p>Robust security measures across edge devices to the cloud, ensuring integrity and operational confidentiality.</p>
+      </div>
+      <div class="eh-card fade-up">
+        <div class="eh-icon">&#x1F465;</div>
+        <h4>Role-Based Access Control</h4>
+        <p>Precise control over user permissions to devices and cloud services, enhancing security and management.</p>
+      </div>
+      <div class="eh-card fade-up">
+        <div class="eh-icon">&#x1F517;</div>
+        <h4>3rd Party Integration</h4>
+        <p>APIs for data plugin and forwarding, enabling interoperability and extensibility of existing infrastructure.</p>
+      </div>
+    </div>
+
+    <!-- Use Cases -->
+    <h3 class="usecases-title fade-up">Real-World Use Cases</h3>
+    <div class="usecase-grid">
+      <div class="uc-card fade-up">
+        <div class="uc-card-img">
+          <img src="device-management.png" alt="Remote Edge Device Management">
+        </div>
+        <div class="uc-card-body">
+          <h4>Remote Edge Device Management</h4>
+          <p>EdgeHub enables remote updates of I/O configurations, firmware, and applications on IPCs, ensuring efficient and seamless management of devices across production lines.</p>
+        </div>
+      </div>
+      <div class="uc-card fade-up">
+        <div class="uc-card-img">
+          <img src="facility-monitoring.png" alt="Wastewater Plant Monitoring">
+        </div>
+        <div class="uc-card-body">
+          <h4>Wastewater Plant Remote Monitoring</h4>
+          <p>EdgeHub's dashboard allows water treatment operators to visualize and analyze data, monitor key indicators, and improve system performance by quickly identifying issues.</p>
+        </div>
+      </div>
+      <div class="uc-card fade-up">
+        <div class="uc-card-img">
+          <img src="ev-charger.png" alt="Dynamic EV Charger Management">
+        </div>
+        <div class="uc-card-body">
+          <h4>Dynamic EV Charger Management</h4>
+          <p>Remotely manage gateways connected to EV chargers, optimizing vehicle charging efficiency while ensuring power usage stays within capacity limits.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI VISION ===== -->
+<section class="ai-vision section-pad" id="ai-vision">
+  <div class="ai-vision-bg"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="text-align:center; max-width:700px; margin:0 auto;">
+      <p class="section-label">AI-Powered Safety</p>
+      <h2 class="section-title">AI Vision for Manufacturing Safety</h2>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-images fade-up">
+        <img src="ai-safety.png" alt="AI Vision - Person Detection near Forklift">
+        <img src="ai-detect.png" alt="AI Vision - PPE Detection: Helmet and Vest">
+      </div>
+      <div class="ai-text-content fade-up">
+        <p>Turn your existing CCTV into a smart safety system. Our AI Vision solutions detect safety hazards in real-time across manufacturing plants, warehouses, and industrial environments.</p>
+        <p>Computer vision models identify PPE compliance (helmets, vests), detect proximity hazards near heavy machinery, and monitor zone violations — all using your existing camera infrastructure.</p>
+        <div style="margin-top: 24px;">
+          <span class="ai-tag">PPE Detection</span>
+          <span class="ai-tag">Proximity Alerts</span>
+          <span class="ai-tag">Zone Monitoring</span>
+          <span class="ai-tag">Real-time Alerts</span>
+          <span class="ai-tag">Existing CCTV</span>
+          <span class="ai-tag">Warehouse Safety</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPLICATIONS ===== -->
+<section class="applications section-pad" id="applications">
+  <div class="container">
+    <div style="text-align:center; max-width:600px; margin:0 auto 16px;">
+      <p class="section-label">Industry Applications</p>
+      <h2 class="section-title">Deployed Across Singapore &amp; Beyond</h2>
+      <p class="section-desc">Real-world deployments across diverse manufacturing and industrial sectors.</p>
+    </div>
+    <div class="app-grid">
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x1F4A0;</div>
+        <h4>Wafer Fabs</h4>
+        <p>Semiconductor manufacturing</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x2600;</div>
+        <h4>Solar Rooftop</h4>
+        <p>Monitoring & edge intelligence</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x1F3E2;</div>
+        <h4>Facility Monitoring</h4>
+        <p>Building & campus management</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x1F50C;</div>
+        <h4>Electronics Manufacturing</h4>
+        <p>Assembly & quality control</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x26A1;</div>
+        <h4>Power &amp; Utility</h4>
+        <p>Monitoring key devices</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x1F69A;</div>
+        <h4>Transportation</h4>
+        <p>Fleet & logistics monitoring</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x1F33F;</div>
+        <h4>Solar Plants</h4>
+        <p>IoT with edge intelligence</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x1F30F;</div>
+        <h4>Global Outlook</h4>
+        <p>Singapore-based, worldwide reach</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA / CONTACT ===== -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <p class="section-label" style="color:var(--amber);">Get Started</p>
+      <h2 class="section-title">Ready to Transform Your Operations?</h2>
+      <p>Let's discuss how IoT, AI Vision, and edge intelligence can solve your real business challenges — with measurable ROI.</p>
+      <a href="https://www.nexalyticsdtx.com" target="_blank" class="cta-link">
+        Visit nexalyticsdtx.com <span>&#8594;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo.jpg" alt="Nexalytics DTX">
+        <span>NEXALYTICS DTX</span>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#iot">IoT</a>
+        <a href="#ai-vision">AI Vision</a>
+        <a href="https://www.nexalyticsdtx.com" target="_blank">Website</a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Nexalytics DTX. All rights reserved. | www.nexalyticsdtx.com</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile menu toggle
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Scroll animations
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      // Stagger animations for siblings
+      const parent = entry.target.parentElement;
+      const siblings = parent.querySelectorAll('.fade-up');
+      const idx = Array.from(siblings).indexOf(entry.target);
+      entry.target.style.transitionDelay = `${idx * 0.1}s`;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
