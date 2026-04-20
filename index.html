@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexalytics DTX — Think Digital | IoT for Manufacturing</title>
+<title>Nexalytics DTX — Think Digital | Technology Solutions</title>
+<link rel="icon" type="image/png" href="newpics/square-higres-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -18,6 +19,7 @@
   --amber-glow: rgba(232, 148, 46, 0.15);
   --white: #ffffff;
   --off-white: #f4f6fa;
+  --light-bg: #f8f9fc;
   --gray-100: #e8ecf2;
   --gray-200: #c7cdd9;
   --gray-400: #8891a5;
@@ -38,36 +40,30 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ===== UTILITY ===== */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .section-pad { padding: var(--section-pad) 0; }
 
 /* ===== NAVIGATION ===== */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(15, 27, 61, 0.92);
+  background: rgba(15, 27, 61, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(232, 148, 46, 0.12);
   transition: all 0.4s ease;
 }
-.nav.scrolled { background: rgba(15, 27, 61, 0.98); box-shadow: 0 4px 40px rgba(0,0,0,0.3); }
+.nav.scrolled { background: rgba(15, 27, 61, .98); box-shadow: 0 4px 40px rgba(0,0,0,0.3); }
 .nav-inner {
   display: flex; align-items: center; justify-content: space-between;
-  max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px;
+  max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 80px;
 }
-.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.nav-logo img { height: 44px; border-radius: 6px; }
-.nav-logo span {
-  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.15rem;
-  color: var(--white); letter-spacing: 0.5px;
-}
-.nav-logo small { display: block; font-size: 0.6rem; font-weight: 400; color: var(--amber); letter-spacing: 3px; text-transform: uppercase; }
-.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo img { height: 56px; border-radius: 6px; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
 .nav-links a {
-  color: var(--gray-200); text-decoration: none; font-size: 0.88rem;
+  color: var(--gray-200); text-decoration: none; font-size: 0.84rem;
   font-weight: 500; letter-spacing: 0.3px; transition: color 0.3s;
-  position: relative;
+  position: relative; white-space: nowrap;
 }
 .nav-links a::after {
   content: ''; position: absolute; bottom: -4px; left: 0; width: 0;
@@ -78,40 +74,38 @@ body {
 .nav-cta {
   background: var(--amber); color: var(--navy); border: none; padding: 10px 24px;
   border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer;
-  transition: all 0.3s; text-decoration: none;
+  transition: all 0.3s; text-decoration: none; white-space: nowrap;
 }
 .nav-cta:hover { background: var(--amber-light); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(232, 148, 46, 0.4); }
 
 .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
 
-/* ===== HERO ===== */
+/* ===== HERO (LIGHTER) ===== */
 .hero {
   position: relative; min-height: 100vh; display: flex; align-items: center;
-  background: var(--navy); overflow: hidden;
+  background: linear-gradient(160deg, var(--white) 0%, var(--light-bg) 30%, #e8edf6 60%, #d9e0ef 100%);
+  overflow: hidden;
 }
 .hero-bg {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(232, 148, 46, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(26, 154, 170, 0.06) 0%, transparent 50%),
-    linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy) 100%);
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(232, 148, 46, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(26, 154, 170, 0.04) 0%, transparent 50%);
 }
-/* Animated grid */
 .hero-grid {
-  position: absolute; inset: 0; opacity: 0.04;
+  position: absolute; inset: 0; opacity: 0.03;
   background-image:
-    linear-gradient(rgba(232,148,46,0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232,148,46,0.5) 1px, transparent 1px);
+    linear-gradient(rgba(15,27,61,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,27,61,0.15) 1px, transparent 1px);
   background-size: 60px 60px;
   animation: gridDrift 20s linear infinite;
 }
 @keyframes gridDrift { to { transform: translate(60px, 60px); } }
 
-/* Circuit lines decoration */
 .hero-circuit {
   position: absolute; top: 10%; right: 5%; width: 400px; height: 400px;
-  opacity: 0.06; border: 2px solid var(--amber);
+  opacity: 0.05; border: 2px solid var(--amber);
   border-radius: 50%; animation: circuitPulse 6s ease-in-out infinite;
 }
 .hero-circuit::before {
@@ -120,8 +114,8 @@ body {
   animation: circuitPulse 6s ease-in-out infinite reverse;
 }
 @keyframes circuitPulse {
-  0%, 100% { transform: scale(1); opacity: 0.06; }
-  50% { transform: scale(1.05); opacity: 0.12; }
+  0%, 100% { transform: scale(1); opacity: 0.05; }
+  50% { transform: scale(1.05); opacity: 0.1; }
 }
 
 .hero-content {
@@ -131,7 +125,7 @@ body {
 }
 .hero-text h1 {
   font-family: 'Outfit', sans-serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-  font-weight: 800; line-height: 1.1; color: var(--white); margin-bottom: 8px;
+  font-weight: 800; line-height: 1.1; color: var(--navy); margin-bottom: 8px;
 }
 .hero-text h1 .highlight {
   background: linear-gradient(135deg, var(--amber), var(--amber-light));
@@ -144,7 +138,7 @@ body {
   margin-bottom: 24px;
 }
 .hero-desc {
-  font-size: 1.1rem; line-height: 1.7; color: var(--gray-200);
+  font-size: 1.1rem; line-height: 1.7; color: var(--gray-600);
   max-width: 520px; margin-bottom: 40px;
 }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -157,21 +151,21 @@ body {
 .btn-primary:hover { background: var(--amber-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232, 148, 46, 0.35); }
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 8px;
-  background: transparent; color: var(--white); padding: 14px 32px;
+  background: var(--navy); color: var(--white); padding: 14px 32px;
   border-radius: 10px; font-weight: 600; font-size: 0.95rem;
-  text-decoration: none; transition: all 0.3s; border: 1.5px solid rgba(255,255,255,0.2);
+  text-decoration: none; transition: all 0.3s; border: 1.5px solid var(--navy);
 }
-.btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+.btn-secondary:hover { background: var(--navy-mid); box-shadow: 0 8px 30px rgba(15, 27, 61, 0.25); }
 
 .hero-visual {
   position: relative; display: flex; align-items: center; justify-content: center;
 }
 .hero-logo-wrap {
-  position: relative; width: 340px; height: 340px;
+  position: relative; width: 380px; height: 380px;
   display: flex; align-items: center; justify-content: center;
 }
 .hero-logo-wrap img {
-  width: 260px; height: 260px; object-fit: contain; border-radius: 20px;
+  width: 300px; height: 300px; object-fit: contain; border-radius: 20px;
   position: relative; z-index: 2;
 }
 .hero-logo-ring {
@@ -190,27 +184,24 @@ body {
 .hero-logo-ring:nth-child(2)::before { background: var(--teal); box-shadow: 0 0 20px var(--teal); }
 @keyframes ringRotate { to { transform: rotate(360deg); } }
 
-/* Stats bar */
 .hero-stats {
-  position: relative; z-index: 2; max-width: 1200px; margin: -40px auto 0;
-  padding: 0 24px;
+  position: relative; z-index: 2; max-width: 1200px; margin: -40px auto 0; padding: 0 24px;
 }
 .stats-bar {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-  background: rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden;
-  border: 1px solid rgba(232, 148, 46, 0.1);
+  background: rgba(15,27,61,0.04); border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--gray-100);
 }
 .stat-item {
-  padding: 32px 24px; text-align: center;
-  background: rgba(15, 27, 61, 0.8); backdrop-filter: blur(10px);
+  padding: 32px 24px; text-align: center; background: var(--white);
 }
 .stat-number {
   font-family: 'Outfit', sans-serif; font-size: 2rem;
   font-weight: 800; color: var(--amber); margin-bottom: 4px;
 }
-.stat-label { font-size: 0.82rem; color: var(--gray-200); font-weight: 400; letter-spacing: 0.5px; }
+.stat-label { font-size: 0.82rem; color: var(--gray-600); font-weight: 400; letter-spacing: 0.5px; }
 
-/* ===== ABOUT SECTION ===== */
+/* ===== ABOUT ===== */
 .about { background: var(--off-white); }
 .about-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
@@ -222,7 +213,7 @@ body {
 .about-image img { width: 100%; display: block; }
 .about-image::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(15, 27, 61, 0.05), transparent);
+  background: linear-gradient(135deg, rgba(15, 27, 61, 0.03), transparent);
 }
 .section-label {
   font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 600;
@@ -233,6 +224,18 @@ body {
   font-weight: 700; line-height: 1.2; color: var(--navy); margin-bottom: 20px;
 }
 .section-desc { font-size: 1.05rem; line-height: 1.75; color: var(--gray-600); margin-bottom: 24px; }
+
+.about-quote {
+  padding: 24px 28px; border-radius: 14px; margin-bottom: 28px;
+  background: linear-gradient(135deg, rgba(232, 148, 46, 0.06), rgba(26, 154, 170, 0.04));
+  border-left: 4px solid var(--amber);
+}
+.about-quote p {
+  font-size: 0.95rem; line-height: 1.7; color: var(--navy); font-style: italic;
+}
+.about-quote .quote-summary {
+  font-style: normal; font-weight: 600; color: var(--navy); margin-bottom: 12px; font-size: 1rem;
+}
 
 .vision-mission { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
 .vm-card {
@@ -247,8 +250,7 @@ body {
 }
 .vm-card h4 .icon {
   width: 32px; height: 32px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem;
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
 }
 .vm-card h4 .icon.vision-icon { background: var(--amber-glow); }
 .vm-card h4 .icon.mission-icon { background: rgba(26, 154, 170, 0.12); }
@@ -273,8 +275,7 @@ body {
 .why-card:hover::before { transform: scaleX(1); }
 .why-icon {
   width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 20px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem;
+  display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
 }
 .why-icon.icon-1 { background: linear-gradient(135deg, rgba(232,148,46,0.12), rgba(232,148,46,0.05)); }
 .why-icon.icon-2 { background: linear-gradient(135deg, rgba(26,154,170,0.12), rgba(26,154,170,0.05)); }
@@ -324,10 +325,16 @@ body {
 .sol-card p { font-size: 0.88rem; line-height: 1.65; color: var(--gray-400); }
 .sol-card:nth-child(4) .sol-icon,
 .sol-card:nth-child(5) .sol-icon { background: rgba(26,154,170,0.15); }
-.sol-card:nth-child(6) .sol-icon,
-.sol-card:nth-child(7) .sol-icon { background: rgba(46,204,113,0.12); }
+.sol-card:nth-child(6) .sol-icon { background: rgba(46,204,113,0.12); }
 
-/* ===== IOT SECTION ===== */
+.painpoints-banner {
+  margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;
+}
+.painpoints-banner img {
+  width: 100%; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ===== IOT FOR MANUFACTURING ===== */
 .iot-section { background: var(--off-white); }
 .iot-hero-text { text-align: center; max-width: 700px; margin: 0 auto 48px; }
 
@@ -338,7 +345,6 @@ body {
 }
 .iot-arch-img img { width: 100%; display: block; }
 
-/* EdgeHub features */
 .edgehub-title {
   font-family: 'Outfit', sans-serif; font-size: clamp(1.4rem, 2.5vw, 2rem);
   font-weight: 700; color: var(--navy); text-align: center; margin-bottom: 12px;
@@ -363,7 +369,6 @@ body {
 .eh-card h4 { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
 .eh-card p { font-size: 0.82rem; line-height: 1.6; color: var(--gray-600); }
 
-/* Use cases */
 .usecases-title {
   font-family: 'Outfit', sans-serif; font-size: clamp(1.4rem, 2.5vw, 2rem);
   font-weight: 700; color: var(--navy); text-align: center; margin-bottom: 40px;
@@ -399,9 +404,7 @@ body {
 .ai-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 48px;
 }
-.ai-images {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-}
+.ai-images { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .ai-images img {
   width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
 }
@@ -413,61 +416,195 @@ body {
   background: rgba(232,148,46,0.1); color: var(--amber); border: 1px solid rgba(232,148,46,0.2);
 }
 
-/* ===== APPLICATIONS ===== */
+/* ===== TECHNOLOGY HUB ===== */
+.tech-hub { background: var(--off-white); }
+.tech-hub-intro { text-align: center; max-width: 760px; margin: 0 auto 20px; }
+.tech-hub-intro p { color: var(--gray-600); font-size: 1.05rem; line-height: 1.75; }
+.tech-hub-banner {
+  display: block; max-width: 800px; margin: 0 auto 48px;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 12px 40px rgba(15,27,61,0.08);
+}
+.tech-hub-banner img { width: 100%; display: block; }
+
+.tech-tabs { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 40px; }
+.tech-tab {
+  padding: 12px 24px; border-radius: 10px; border: 1px solid var(--gray-100);
+  background: var(--white); cursor: pointer; transition: all 0.3s;
+  font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.88rem;
+  color: var(--gray-600);
+}
+.tech-tab:hover, .tech-tab.active {
+  border-color: var(--amber); background: var(--amber); color: var(--navy);
+  box-shadow: 0 4px 20px rgba(232, 148, 46, 0.25);
+}
+
+.tech-panel { display: none; }
+.tech-panel.active { display: block; }
+
+.tech-detail-content h3 {
+  font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 16px;
+}
+.tech-detail-content > p { font-size: 1rem; line-height: 1.75; color: var(--gray-600); margin-bottom: 24px; }
+
+.tech-offerings { margin-bottom: 24px; }
+.tech-offerings h4 {
+  font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 12px;
+}
+.tech-offerings ul { list-style: none; padding: 0; }
+.tech-offerings li {
+  padding: 8px 0; padding-left: 24px; position: relative;
+  font-size: 0.92rem; color: var(--gray-600); line-height: 1.6;
+}
+.tech-offerings li::before {
+  content: ''; position: absolute; left: 0; top: 14px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--amber);
+}
+
+.tech-benefits {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;
+}
+.tech-benefit {
+  padding: 16px; border-radius: 10px; background: var(--white);
+  border: 1px solid var(--gray-100); font-size: 0.88rem; color: var(--navy);
+  font-weight: 500; text-align: center; transition: all 0.3s;
+}
+.tech-benefit:hover { border-color: var(--amber); box-shadow: 0 4px 16px var(--amber-glow); }
+
+.tech-bottom-row {
+  display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;
+}
+.tech-industries { flex: 1; min-width: 200px; }
+.tech-industries h4 {
+  font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 8px;
+}
+.tech-industries .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-tag {
+  display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 0.78rem;
+  font-weight: 600; background: rgba(232,148,46,0.1); color: var(--amber);
+  border: 1px solid rgba(232,148,46,0.2);
+}
+
+.tech-case-study {
+  flex: 2; min-width: 300px;
+  padding: 20px 24px; border-radius: 12px; background: var(--white);
+  border: 1px solid var(--gray-100);
+}
+.tech-case-study h4 {
+  font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 700;
+  color: var(--amber); margin-bottom: 8px;
+}
+.tech-case-study p { font-size: 0.88rem; line-height: 1.65; color: var(--gray-600); }
+
+/* ===== INDUSTRIES ===== */
 .applications { background: var(--white); }
 .app-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px;
 }
 .app-card {
   padding: 28px 20px; text-align: center; border-radius: 14px;
-  background: var(--off-white); border: 1px solid transparent;
-  transition: all 0.3s;
+  background: var(--off-white); border: 1px solid transparent; transition: all 0.3s;
 }
 .app-card:hover { background: var(--white); border-color: var(--gray-100); box-shadow: 0 8px 30px rgba(15,27,61,0.06); transform: translateY(-3px); }
 .app-icon-wrap {
   width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 16px;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
-  font-size: 1.4rem;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid)); font-size: 1.4rem;
 }
 .app-card h4 { font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); }
 .app-card p { font-size: 0.78rem; color: var(--gray-400); margin-top: 6px; }
 
-/* ===== CONTACT / CTA ===== */
+/* ===== MANAGEMENT TEAM ===== */
+.team-section { background: var(--off-white); }
+.team-intro { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.team-card {
+  text-align: center; padding: 40px 28px 32px; border-radius: 16px;
+  background: var(--white); border: 1px solid var(--gray-100); transition: all 0.4s;
+}
+.team-card:hover { box-shadow: 0 12px 40px rgba(15,27,61,0.08); transform: translateY(-4px); border-color: var(--amber); }
+.team-avatar {
+  width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  font-size: 2rem; color: var(--amber);
+}
+.team-card h4 {
+  font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 4px;
+}
+.team-card .team-role { font-size: 0.82rem; color: var(--amber); font-weight: 600; margin-bottom: 12px; }
+.team-card p { font-size: 0.85rem; line-height: 1.6; color: var(--gray-600); }
+
+/* ===== PARTNERS ===== */
+.partners-section {
+  background: var(--navy); position: relative; overflow: hidden;
+}
+.partners-section .section-label { color: var(--amber); }
+.partners-section .section-title { color: var(--white); }
+.partners-section .section-desc { color: var(--gray-200); }
+.partners-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,148,46,0.05) 0%, transparent 60%);
+}
+.partners-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px;
+}
+.partner-card {
+  padding: 36px 24px; border-radius: 16px; text-align: center;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px); transition: all 0.4s;
+}
+.partner-card:hover {
+  background: rgba(255,255,255,0.08); border-color: rgba(232,148,46,0.2); transform: translateY(-4px);
+}
+.partner-icon {
+  width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(232,148,46,0.1); font-size: 1.6rem;
+}
+.partner-card h4 {
+  font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700;
+  color: var(--white); margin-bottom: 6px;
+}
+.partner-card p { font-size: 0.82rem; line-height: 1.6; color: var(--gray-400); }
+
+/* ===== CTA ===== */
 .cta-section {
   position: relative; padding: var(--section-pad) 0; overflow: hidden;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  background: linear-gradient(135deg, var(--off-white) 0%, #e8edf6 100%);
 }
 .cta-section::before {
   content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
-  border-radius: 50%; background: radial-gradient(circle, rgba(232,148,46,0.08), transparent 70%);
+  border-radius: 50%; background: radial-gradient(circle, rgba(232,148,46,0.06), transparent 70%);
 }
 .cta-inner {
   position: relative; z-index: 2; text-align: center; max-width: 640px; margin: 0 auto;
 }
-.cta-inner .section-title { color: var(--white); margin-bottom: 16px; }
-.cta-inner p { color: var(--gray-200); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
+.cta-inner .section-title { color: var(--navy); margin-bottom: 16px; }
+.cta-inner p { color: var(--gray-600); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
 .cta-link {
   color: var(--amber); font-size: 1.15rem; font-weight: 700;
-  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-  transition: all 0.3s;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
 }
 .cta-link:hover { color: var(--amber-light); gap: 14px; }
 
 /* ===== FOOTER ===== */
 .footer {
-  background: #080e20; padding: 48px 0 28px; border-top: 1px solid rgba(232,148,46,0.08);
+  background: var(--navy); padding: 48px 0 28px; border-top: 1px solid rgba(232,148,46,0.08);
 }
 .footer-inner {
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
 }
 .footer-brand { display: flex; align-items: center; gap: 12px; }
-.footer-brand img { height: 36px; border-radius: 6px; }
-.footer-brand span { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); }
-.footer-links { display: flex; gap: 28px; }
+.footer-brand img { height: 44px; border-radius: 6px; }
+.footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
 .footer-links a { color: var(--gray-400); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
 .footer-links a:hover { color: var(--amber); }
-.footer-copy { width: 100%; text-align: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); }
+.footer-copy { width: 100%; text-align: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); }
 .footer-copy p { font-size: 0.78rem; color: var(--gray-400); }
 
 /* ===== ANIMATIONS ===== */
@@ -483,33 +620,56 @@ body {
   .hero-desc { margin: 0 auto 40px; }
   .hero-actions { justify-content: center; }
   .hero-visual { order: -1; }
-  .hero-logo-wrap { width: 240px; height: 240px; }
-  .hero-logo-wrap img { width: 180px; height: 180px; }
+  .hero-logo-wrap { width: 280px; height: 280px; }
+  .hero-logo-wrap img { width: 220px; height: 220px; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .about-grid { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: repeat(2, 1fr); }
   .solutions-grid { grid-template-columns: repeat(2, 1fr); }
+  .painpoints-banner { grid-template-columns: 1fr; }
   .edgehub-grid { grid-template-columns: repeat(2, 1fr); }
   .usecase-grid { grid-template-columns: 1fr; }
   .ai-grid { grid-template-columns: 1fr; }
+  .tech-benefits { grid-template-columns: repeat(2, 1fr); }
   .app-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .partners-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: block; }
   .nav-links.open {
     display: flex; flex-direction: column; position: absolute;
-    top: 72px; left: 0; right: 0; background: var(--navy);
+    top: 80px; left: 0; right: 0; background: var(--navy);
     padding: 24px; gap: 20px; border-bottom: 1px solid rgba(232,148,46,0.1);
+    z-index: 999;
   }
-  .hero-content { padding-top: 120px; }
+  .hero-content { padding-top: 120px; gap: 40px; }
+  .hero-logo-wrap { width: 220px; height: 220px; }
+  .hero-logo-wrap img { width: 170px; height: 170px; }
   .stats-bar { grid-template-columns: 1fr 1fr; }
   .why-grid { grid-template-columns: 1fr; }
   .solutions-grid { grid-template-columns: 1fr; }
   .edgehub-grid { grid-template-columns: 1fr; }
+  .tech-tabs { gap: 8px; }
+  .tech-tab { padding: 10px 16px; font-size: 0.8rem; }
+  .tech-benefits { grid-template-columns: 1fr 1fr; }
+  .tech-bottom-row { flex-direction: column; }
   .app-grid { grid-template-columns: 1fr 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: 1fr 1fr; }
   .vision-mission { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .stats-bar { grid-template-columns: 1fr; }
+  .app-grid { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: 1fr; }
+  .hero-logo-wrap { width: 180px; height: 180px; }
+  .hero-logo-wrap img { width: 140px; height: 140px; }
+  .tech-tabs { flex-direction: column; align-items: stretch; }
+  .tech-benefits { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -519,19 +679,16 @@ body {
 <nav class="nav" id="navbar">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <img src="logo.jpg" alt="Nexalytics DTX Logo">
-      <div>
-        <span>NEXALYTICS DTX</span>
-        <small>Think Digital</small>
-      </div>
+      <img src="newpics/rectangle-highres-logo.png" alt="Nexalytics DTX Logo">
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#why">Why Us</a></li>
       <li><a href="#solutions">Solutions</a></li>
-      <li><a href="#iot">IoT</a></li>
-      <li><a href="#ai-vision">AI Vision</a></li>
-      <li><a href="#applications">Industries</a></li>
+      <li><a href="#tech-hub">Technology Hub</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#team">Management Team</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#about">About</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Contact Us</a>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -549,7 +706,7 @@ body {
     <div class="hero-text">
       <p class="hero-tagline">Think Digital</p>
       <h1>Bringing the <span class="highlight">Right Technology</span> to the Right Problem</h1>
-      <p class="hero-desc">Delivering real value through IoT, AI Vision, and Digital Transformation — not just innovation for innovation's sake. Singapore-based with a global outlook.</p>
+      <p class="hero-desc">Delivering real value through AI/ML, IoT, Voice Analysis, Industrial Robotics, and Digital Transformation. Singapore-based with a global outlook, we empower organizations to embrace the future with confidence.</p>
       <div class="hero-actions">
         <a href="#solutions" class="btn-primary">Explore Solutions &#8594;</a>
         <a href="#contact" class="btn-secondary">Get in Touch</a>
@@ -559,7 +716,7 @@ body {
       <div class="hero-logo-wrap">
         <div class="hero-logo-ring"></div>
         <div class="hero-logo-ring"></div>
-        <img src="logo.jpg" alt="Nexalytics DTX">
+        <img src="newpics/square-higres-logo.png" alt="Nexalytics DTX">
       </div>
     </div>
   </div>
@@ -567,19 +724,19 @@ body {
     <div class="stats-bar">
       <div class="stat-item">
         <div class="stat-number">IoT</div>
-        <div class="stat-label">Manufacturing Solutions</div>
+        <div class="stat-label">Connected Ecosystems</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">AI</div>
-        <div class="stat-label">Vision Safety Systems</div>
+        <div class="stat-number">AI / ML</div>
+        <div class="stat-label">Intelligent Solutions</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">Edge</div>
-        <div class="stat-label">Computing & Analytics</div>
+        <div class="stat-number">Voice</div>
+        <div class="stat-label">Speech Intelligence</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">Cloud</div>
-        <div class="stat-label">Digital Transformation</div>
+        <div class="stat-number">Robotics</div>
+        <div class="stat-label">Industrial Automation</div>
       </div>
     </div>
   </div>
@@ -595,11 +752,18 @@ body {
       <div class="fade-up">
         <p class="section-label">About Nexalytics DTX</p>
         <h2 class="section-title">Demand-Driven Digital Solutions with Measurable Outcomes</h2>
+
+        <div class="about-quote">
+          <p class="quote-summary">NDTX aims to blend advanced technology with a strong commitment to customer well-being&mdash;focusing on co-creating meaningful value rather than extracting it, and building long-term relationships grounded in trust, respect, and mutual benefit.</p>
+          <p>&ldquo;At NDTX, we want to effectively combine technological sophistication with genuine care for customer well-being&mdash;using technology not merely to extract value from customers but to create meaningful value with and for them. In doing so, we will want to fulfill the true promise of customer-centricity: creating sustainable prosperity through relationships built on mutual value creation, respect, and trust.&rdquo;</p>
+        </div>
+
         <p class="section-desc">Our mission is to deeply understand genuine customer challenges, apply proven technologies where they create the most impact, and deliver demand-driven digital solutions with measurable outcomes and strong return on investment.</p>
+
         <div class="vision-mission">
           <div class="vm-card">
             <h4><span class="icon vision-icon">&#x1F3AF;</span> Vision</h4>
-            <p>Bringing the right technology to the right problem — delivering real value, not just innovation.</p>
+            <p>Bringing the right technology to the right problem&mdash;delivering real value, not just innovation.</p>
           </div>
           <div class="vm-card">
             <h4><span class="icon mission-icon">&#x1F680;</span> Mission</h4>
@@ -621,68 +785,73 @@ body {
     <div class="why-grid">
       <div class="why-card fade-up">
         <div class="why-icon icon-1">&#x1F4AC;</div>
-        <h3>Business-First Digital Thinking</h3>
-        <p>We start from your business goals and work backward to the right technology — never the other way around.</p>
+        <h3>Industry-Specific Expertise</h3>
+        <p>Deep domain knowledge across manufacturing, healthcare, finance, telecom, and more&mdash;tailored solutions that fit your industry.</p>
       </div>
       <div class="why-card fade-up">
-        <div class="why-icon icon-2">&#x1F512;</div>
-        <h3>Secure, Scalable Architectures</h3>
+        <div class="why-icon icon-2">&#x1F4CA;</div>
+        <h3>Proven Case Studies</h3>
+        <p>Demonstrated results with real-world deployments&mdash;from reducing unauthorized access by 45% to cutting fuel costs by 20%.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon icon-3">&#x1F512;</div>
+        <h3>Scalable &amp; Secure Solutions</h3>
         <p>Enterprise-grade security from edge to cloud, with architectures built to scale as your operations grow.</p>
       </div>
       <div class="why-card fade-up">
-        <div class="why-icon icon-3">&#x26A1;</div>
-        <h3>Accelerated Time-to-Value</h3>
-        <p>Rapid deployment with industry-specific accelerators that get your solutions up and running fast.</p>
-      </div>
-      <div class="why-card fade-up">
-        <div class="why-icon icon-4">&#x1F91D;</div>
-        <h3>Advisory-Led Delivery</h3>
-        <p>Expert guidance through every phase — from strategy and design through implementation and optimization.</p>
+        <div class="why-icon icon-4">&#x1F4A1;</div>
+        <h3>Commitment to Innovation</h3>
+        <p>Continuously pushing boundaries with cutting-edge technologies while maintaining practical, business-first thinking.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== SOLUTIONS ===== -->
+<!-- ===== SOLUTIONS (Overview + IoT & AI Vision featured) ===== -->
 <section class="solutions section-pad" id="solutions">
   <div class="solutions-bg"></div>
   <div class="container" style="position:relative; z-index:2;">
-    <div style="text-align:center; max-width:640px; margin:0 auto 16px;">
-      <p class="section-label">Solutions & Skill Set</p>
-      <h2 class="section-title">End-to-End Digital &amp; IoT Capabilities</h2>
-      <p class="section-desc">From cloud platforms to factory floors, our solutions are fine-tuned to address real customer pain points across industries.</p>
+    <div style="text-align:center; max-width:700px; margin:0 auto 16px;">
+      <p class="section-label">Our Solutions</p>
+      <h2 class="section-title">End-to-End Technology Solutions</h2>
+      <p class="section-desc">From cloud platforms to factory floors, our solutions are fine-tuned to address real customer pain points across industries. IoT and AI Vision are at the heart of what we deliver.</p>
     </div>
     <div class="solutions-grid">
       <div class="sol-card fade-up">
+        <div class="sol-icon">&#x1F310;</div>
+        <h3>IoT Customisation Solutions</h3>
+        <p>End-to-end IoT architecture from perception layer sensors through network gateways to cloud applications&mdash;enabling real-time monitoring, control, and predictive maintenance.</p>
+      </div>
+      <div class="sol-card fade-up">
+        <div class="sol-icon">&#x1F441;</div>
+        <h3>AI Vision for Safety</h3>
+        <p>Turn your existing CCTV into a smart safety system. Detect PPE compliance, proximity hazards, and zone violations in real-time across manufacturing environments.</p>
+      </div>
+      <div class="sol-card fade-up">
         <div class="sol-icon">&#x2699;</div>
         <h3>Digital Transformation &amp; Analytics</h3>
-        <p>Modernize operations with data-driven insights, process automation, and digital-first strategies.</p>
+        <p>Modernize operations with data-driven insights, process automation, and digital-first strategies for measurable ROI.</p>
       </div>
       <div class="sol-card fade-up">
         <div class="sol-icon">&#x1F4E1;</div>
-        <h3>Domain-Specific AI &amp; IoT Solutions</h3>
-        <p>Purpose-built AI and IoT architectures tailored to manufacturing, logistics, and facility management.</p>
+        <h3>Domain-Specific AI &amp; IoT</h3>
+        <p>Purpose-built AI and IoT architectures tailored to manufacturing, logistics, and facility management needs.</p>
       </div>
       <div class="sol-card fade-up">
         <div class="sol-icon">&#x1F3AF;</div>
         <h3>Customer Pain Point Solutions</h3>
-        <p>Fine-tuned to address end customer pain points with practical, measurable outcomes.</p>
+        <p>Fine-tuned to address end customer pain points with practical, measurable outcomes and strong return on investment.</p>
       </div>
       <div class="sol-card fade-up">
         <div class="sol-icon">&#x1F3ED;</div>
         <h3>Industry-Specific Accelerators</h3>
-        <p>Pre-built frameworks for semiconductors, electronics, solar, and more — reducing time to deployment.</p>
+        <p>Pre-built frameworks for semiconductors, electronics, solar, and more&mdash;reducing time to deployment significantly.</p>
       </div>
-      <div class="sol-card fade-up">
-        <div class="sol-icon">&#x2601;</div>
-        <h3>Data, AI &amp; Cloud-Driven Solutions</h3>
-        <p>Leverage cloud infrastructure, edge computing, and AI to unlock actionable intelligence at scale.</p>
-      </div>
-      <div class="sol-card fade-up">
-        <div class="sol-icon">&#x1F310;</div>
-        <h3>Enterprise &amp; Industry-Focused Offerings</h3>
-        <p>Comprehensive solutions designed for enterprise-grade reliability with industry-focused customization.</p>
-      </div>
+    </div>
+
+    <div class="painpoints-banner fade-up">
+      <img src="newpics/customer-painpoints-chart.png" alt="Customer Pain Points Analysis">
+      <img src="newpics/uncover-customer-insigths.png" alt="Uncover Your Customer Insights">
     </div>
   </div>
 </section>
@@ -693,15 +862,13 @@ body {
     <div class="iot-hero-text fade-up">
       <p class="section-label">IoT for Manufacturing</p>
       <h2 class="section-title">Smart Manufacturing with Edge Intelligence</h2>
-      <p class="section-desc">End-to-end IoT architecture from perception layer sensors through network gateways to cloud applications — enabling real-time monitoring, control, and analytics.</p>
+      <p class="section-desc">End-to-end IoT architecture from perception layer sensors through network gateways to cloud applications&mdash;enabling real-time monitoring, control, and analytics.</p>
     </div>
 
-    <!-- Architecture diagram -->
     <div class="iot-arch-img fade-up">
       <img src="iot-architecture.png" alt="Typical IoT Architecture - Application Layer, Network Layer, Perception Layer">
     </div>
 
-    <!-- EdgeHub Features -->
     <h3 class="edgehub-title fade-up">EdgeHub Features</h3>
     <p class="edgehub-sub fade-up">Comprehensive device management from edge to cloud</p>
     <div class="edgehub-grid">
@@ -737,7 +904,6 @@ body {
       </div>
     </div>
 
-    <!-- Use Cases -->
     <h3 class="usecases-title fade-up">Real-World Use Cases</h3>
     <div class="usecase-grid">
       <div class="uc-card fade-up">
@@ -786,7 +952,7 @@ body {
       </div>
       <div class="ai-text-content fade-up">
         <p>Turn your existing CCTV into a smart safety system. Our AI Vision solutions detect safety hazards in real-time across manufacturing plants, warehouses, and industrial environments.</p>
-        <p>Computer vision models identify PPE compliance (helmets, vests), detect proximity hazards near heavy machinery, and monitor zone violations — all using your existing camera infrastructure.</p>
+        <p>Computer vision models identify PPE compliance (helmets, vests), detect proximity hazards near heavy machinery, and monitor zone violations&mdash;all using your existing camera infrastructure.</p>
         <div style="margin-top: 24px;">
           <span class="ai-tag">PPE Detection</span>
           <span class="ai-tag">Proximity Alerts</span>
@@ -800,13 +966,239 @@ body {
   </div>
 </section>
 
-<!-- ===== APPLICATIONS ===== -->
-<section class="applications section-pad" id="applications">
+<!-- ===== TECHNOLOGY HUB ===== -->
+<section class="tech-hub section-pad" id="tech-hub">
+  <div class="container">
+    <div class="tech-hub-intro fade-up">
+      <p class="section-label">Technology Hub</p>
+      <h2 class="section-title">Our Technology Offerings</h2>
+      <p>At NexalyticsDTX, we believe technology should be more than just a tool&mdash;it should be a catalyst for transformation. Explore our specialized technology services designed to transform businesses across industries.</p>
+    </div>
+
+    <div class="tech-hub-banner fade-up">
+      <img src="newpics/customer-painpoints-ai-workflow.png" alt="Customer Pain Points AI Workflow">
+    </div>
+
+    <!-- Tabs: IoT first, Cybersecurity LAST -->
+    <div class="tech-tabs fade-up">
+      <button class="tech-tab active" data-tab="iot">&#x1F310; IoT Customisation</button>
+      <button class="tech-tab" data-tab="aiml">&#x1F916; AI / ML</button>
+      <button class="tech-tab" data-tab="voice">&#x1F399; Voice Analysis</button>
+      <button class="tech-tab" data-tab="robotics">&#x1F3ED; Industrial Robotics</button>
+      <button class="tech-tab" data-tab="cyber">&#x1F512; Cybersecurity</button>
+    </div>
+
+    <!-- IoT Customisation Panel (FIRST - primary focus) -->
+    <div class="tech-panel active" id="panel-iot">
+      <div class="tech-detail-content fade-up">
+        <h3>IoT Customisation Solutions</h3>
+        <p>We design and implement customized Internet of Things (IoT) solutions tailored to industry-specific needs. Our IoT services enable real-time monitoring, predictive maintenance, and smart automation.</p>
+
+        <div class="tech-offerings">
+          <h4>Key Offerings</h4>
+          <ul>
+            <li><strong>Connected Devices:</strong> Smart sensors and controllers.</li>
+            <li><strong>Predictive Maintenance:</strong> Reduce downtime with proactive alerts.</li>
+            <li><strong>Smart Monitoring Systems:</strong> Real-time data collection and analytics.</li>
+            <li><strong>Custom Integrations:</strong> Tailored IoT ecosystems for unique business needs.</li>
+          </ul>
+        </div>
+
+        <div class="tech-benefits">
+          <div class="tech-benefit">Increased efficiency</div>
+          <div class="tech-benefit">Reduced operational costs</div>
+          <div class="tech-benefit">Enhanced safety</div>
+          <div class="tech-benefit">Real-time insights</div>
+        </div>
+
+        <div class="tech-bottom-row">
+          <div class="tech-industries">
+            <h4>Industries Served</h4>
+            <div class="tags">
+              <span class="tech-tag">Manufacturing</span>
+              <span class="tech-tag">Logistics</span>
+              <span class="tech-tag">Energy</span>
+            </div>
+          </div>
+          <div class="tech-case-study">
+            <h4>Case Study</h4>
+            <p>A logistics company used our IoT customization to track fleet performance, reducing fuel costs by 20%.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI / ML Panel -->
+    <div class="tech-panel" id="panel-aiml">
+      <div class="tech-detail-content fade-up">
+        <h3>AI / ML Solutions</h3>
+        <p>Our Artificial Intelligence and Machine Learning solutions empower businesses to automate processes, predict outcomes, and gain actionable insights. We specialize in natural language processing, computer vision, predictive modelling, and advanced analytics.</p>
+
+        <div class="tech-offerings">
+          <h4>Key Offerings</h4>
+          <ul>
+            <li><strong>Predictive Analytics:</strong> Forecast trends and customer behaviour.</li>
+            <li><strong>Natural Language Processing (NLP):</strong> Enhance chatbots, sentiment analysis, and text mining.</li>
+            <li><strong>Computer Vision:</strong> Automate image recognition, defect detection, and surveillance.</li>
+            <li><strong>Custom ML Models:</strong> Tailored solutions for industry-specific challenges.</li>
+          </ul>
+        </div>
+
+        <div class="tech-benefits">
+          <div class="tech-benefit">Improved decision-making</div>
+          <div class="tech-benefit">Enhanced customer experience</div>
+          <div class="tech-benefit">Operational efficiency</div>
+          <div class="tech-benefit">Competitive advantage</div>
+        </div>
+
+        <div class="tech-bottom-row">
+          <div class="tech-industries">
+            <h4>Industries Served</h4>
+            <div class="tags">
+              <span class="tech-tag">Retail</span>
+              <span class="tech-tag">Healthcare</span>
+              <span class="tech-tag">Finance</span>
+              <span class="tech-tag">Manufacturing</span>
+            </div>
+          </div>
+          <div class="tech-case-study">
+            <h4>Case Study</h4>
+            <p>A retail client leveraged our predictive analytics to optimize inventory management, reducing stockouts by 30%.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voice Analysis Panel -->
+    <div class="tech-panel" id="panel-voice">
+      <div class="tech-detail-content fade-up">
+        <h3>Voice Analysis Solutions</h3>
+        <p>Our voice analysis solutions leverage AI to extract insights from speech patterns, tone, and sentiment. These solutions enhance customer service, fraud detection, and healthcare diagnostics.</p>
+
+        <div class="tech-offerings">
+          <h4>Key Offerings</h4>
+          <ul>
+            <li><strong>Sentiment Analysis:</strong> Understand customer emotions in real-time.</li>
+            <li><strong>Fraud Detection:</strong> Identify anomalies in voice interactions.</li>
+            <li><strong>Healthcare Applications:</strong> Detect stress, depression, or cognitive decline.</li>
+            <li><strong>Customer Service Optimization:</strong> Improve call centre performance.</li>
+          </ul>
+        </div>
+
+        <div class="tech-benefits">
+          <div class="tech-benefit">Enhanced customer satisfaction</div>
+          <div class="tech-benefit">Improved fraud prevention</div>
+          <div class="tech-benefit">Better healthcare outcomes</div>
+          <div class="tech-benefit">Operational efficiency</div>
+        </div>
+
+        <div class="tech-bottom-row">
+          <div class="tech-industries">
+            <h4>Industries Served</h4>
+            <div class="tags">
+              <span class="tech-tag">Telecom</span>
+              <span class="tech-tag">Healthcare</span>
+              <span class="tech-tag">Banking</span>
+              <span class="tech-tag">Retail</span>
+            </div>
+          </div>
+          <div class="tech-case-study">
+            <h4>Case Study</h4>
+            <p>A telecom provider used our voice analysis solution to improve call centre efficiency, reducing average handling time by 25%.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Industrial Robotics Panel -->
+    <div class="tech-panel" id="panel-robotics">
+      <div class="tech-detail-content fade-up">
+        <h3>Industrial Robotics Solutions</h3>
+        <p>We deliver robotics solutions that transform manufacturing and industrial operations. Our offerings include robotic process automation, collaborative robots (cobots), and intelligent robotic systems.</p>
+
+        <div class="tech-offerings">
+          <h4>Key Offerings</h4>
+          <ul>
+            <li><strong>Robotic Process Automation (RPA):</strong> Automate repetitive tasks.</li>
+            <li><strong>Collaborative Robots (Cobots):</strong> Work safely alongside humans.</li>
+            <li><strong>Smart Robotics Systems:</strong> AI-powered robots for precision tasks.</li>
+            <li><strong>Integration Services:</strong> Seamless deployment into existing workflows.</li>
+          </ul>
+        </div>
+
+        <div class="tech-benefits">
+          <div class="tech-benefit">Increased productivity</div>
+          <div class="tech-benefit">Improved safety</div>
+          <div class="tech-benefit">Reduced costs</div>
+          <div class="tech-benefit">Enhanced precision</div>
+        </div>
+
+        <div class="tech-bottom-row">
+          <div class="tech-industries">
+            <h4>Industries Served</h4>
+            <div class="tags">
+              <span class="tech-tag">Automotive</span>
+              <span class="tech-tag">Electronics</span>
+              <span class="tech-tag">Pharmaceuticals</span>
+              <span class="tech-tag">Heavy Manufacturing</span>
+            </div>
+          </div>
+          <div class="tech-case-study">
+            <h4>Case Study</h4>
+            <p>An automotive manufacturer deployed our cobots, increasing assembly line efficiency by 40%.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cybersecurity Panel (LAST) -->
+    <div class="tech-panel" id="panel-cyber">
+      <div class="tech-detail-content fade-up">
+        <h3>Cybersecurity Solutions</h3>
+        <p>We provide comprehensive cybersecurity services to protect enterprises against evolving threats. Our solutions cover vulnerability assessments, threat intelligence, compliance frameworks, and advanced defence mechanisms.</p>
+
+        <div class="tech-offerings">
+          <h4>Key Offerings</h4>
+          <ul>
+            <li><strong>Threat Detection &amp; Response:</strong> Real-time monitoring and incident response.</li>
+            <li><strong>Zero Trust Frameworks:</strong> Secure access across devices and networks.</li>
+            <li><strong>Compliance Management:</strong> Ensure adherence to industry regulations.</li>
+            <li><strong>Endpoint Security:</strong> Protect devices from malware and ransomware.</li>
+          </ul>
+        </div>
+
+        <div class="tech-benefits">
+          <div class="tech-benefit">Reduced risk exposure</div>
+          <div class="tech-benefit">Regulatory compliance</div>
+          <div class="tech-benefit">Business continuity</div>
+          <div class="tech-benefit">Enhanced trust</div>
+        </div>
+
+        <div class="tech-bottom-row">
+          <div class="tech-industries">
+            <h4>Industries Served</h4>
+            <div class="tags">
+              <span class="tech-tag">Banking &amp; Finance</span>
+              <span class="tech-tag">Technology</span>
+            </div>
+          </div>
+          <div class="tech-case-study">
+            <h4>Case Study</h4>
+            <p>A financial institution implemented our zero-trust framework, reducing unauthorized access attempts by 45%.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INDUSTRIES ===== -->
+<section class="applications section-pad" id="industries">
   <div class="container">
     <div style="text-align:center; max-width:600px; margin:0 auto 16px;">
       <p class="section-label">Industry Applications</p>
       <h2 class="section-title">Deployed Across Singapore &amp; Beyond</h2>
-      <p class="section-desc">Real-world deployments across diverse manufacturing and industrial sectors.</p>
+      <p class="section-desc">Real-world deployments across diverse manufacturing, industrial, and enterprise sectors.</p>
     </div>
     <div class="app-grid">
       <div class="app-card fade-up">
@@ -815,34 +1207,34 @@ body {
         <p>Semiconductor manufacturing</p>
       </div>
       <div class="app-card fade-up">
-        <div class="app-icon-wrap">&#x2600;</div>
-        <h4>Solar Rooftop</h4>
-        <p>Monitoring & edge intelligence</p>
-      </div>
-      <div class="app-card fade-up">
-        <div class="app-icon-wrap">&#x1F3E2;</div>
-        <h4>Facility Monitoring</h4>
-        <p>Building & campus management</p>
+        <div class="app-icon-wrap">&#x1F3E5;</div>
+        <h4>Healthcare</h4>
+        <p>Diagnostics &amp; patient care</p>
       </div>
       <div class="app-card fade-up">
         <div class="app-icon-wrap">&#x1F50C;</div>
         <h4>Electronics Manufacturing</h4>
-        <p>Assembly & quality control</p>
+        <p>Assembly &amp; quality control</p>
       </div>
       <div class="app-card fade-up">
-        <div class="app-icon-wrap">&#x26A1;</div>
-        <h4>Power &amp; Utility</h4>
-        <p>Monitoring key devices</p>
+        <div class="app-icon-wrap">&#x2600;</div>
+        <h4>Solar &amp; Energy</h4>
+        <p>Monitoring &amp; edge intelligence</p>
       </div>
       <div class="app-card fade-up">
         <div class="app-icon-wrap">&#x1F69A;</div>
-        <h4>Transportation</h4>
-        <p>Fleet & logistics monitoring</p>
+        <h4>Logistics</h4>
+        <p>Fleet &amp; supply chain</p>
       </div>
       <div class="app-card fade-up">
-        <div class="app-icon-wrap">&#x1F33F;</div>
-        <h4>Solar Plants</h4>
-        <p>IoT with edge intelligence</p>
+        <div class="app-icon-wrap">&#x1F4DE;</div>
+        <h4>Telecom</h4>
+        <p>Voice analytics &amp; optimization</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon-wrap">&#x1F3E2;</div>
+        <h4>Facility Monitoring</h4>
+        <p>Building &amp; campus management</p>
       </div>
       <div class="app-card fade-up">
         <div class="app-icon-wrap">&#x1F30F;</div>
@@ -853,13 +1245,79 @@ body {
   </div>
 </section>
 
+<!-- ===== MANAGEMENT TEAM ===== -->
+<section class="team-section section-pad" id="team">
+  <div class="container">
+    <div class="team-intro fade-up">
+      <p class="section-label">Leadership</p>
+      <h2 class="section-title">Management Team</h2>
+      <p class="section-desc">Our leadership team brings decades of combined experience across technology, strategy, and business transformation.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card fade-up">
+        <div class="team-avatar">&#x1F464;</div>
+        <h4>Founding Team</h4>
+        <p class="team-role">Strategic Leadership</p>
+        <p>Visionary leadership driving the company's mission to bring the right technology to the right problem, with measurable outcomes.</p>
+      </div>
+      <div class="team-card fade-up">
+        <div class="team-avatar">&#x1F4BB;</div>
+        <h4>Technology Team</h4>
+        <p class="team-role">Engineering &amp; Innovation</p>
+        <p>Expert technologists specializing in AI/ML, IoT, voice analysis, and cloud architecture, delivering enterprise-grade solutions.</p>
+      </div>
+      <div class="team-card fade-up">
+        <div class="team-avatar">&#x1F91D;</div>
+        <h4>Advisory Board</h4>
+        <p class="team-role">Industry Expertise</p>
+        <p>Seasoned advisors from manufacturing, finance, and technology sectors guiding our strategic direction and partnerships.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARTNERS ===== -->
+<section class="partners-section section-pad" id="partners">
+  <div class="partners-bg"></div>
+  <div class="container" style="position:relative; z-index:2;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 16px;">
+      <p class="section-label">Ecosystem</p>
+      <h2 class="section-title">Our Partners</h2>
+      <p class="section-desc">We collaborate with leading technology providers and industry partners to deliver best-in-class solutions.</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card fade-up">
+        <div class="partner-icon">&#x2601;</div>
+        <h4>Cloud Partners</h4>
+        <p>Enterprise cloud infrastructure and platform services for scalable deployments.</p>
+      </div>
+      <div class="partner-card fade-up">
+        <div class="partner-icon">&#x1F4E1;</div>
+        <h4>IoT &amp; Edge Partners</h4>
+        <p>Hardware and software providers for edge computing and IoT device ecosystems.</p>
+      </div>
+      <div class="partner-card fade-up">
+        <div class="partner-icon">&#x1F916;</div>
+        <h4>AI &amp; Analytics Partners</h4>
+        <p>Leading AI platforms and analytics tools powering our intelligent solutions.</p>
+      </div>
+      <div class="partner-card fade-up">
+        <div class="partner-icon">&#x1F512;</div>
+        <h4>Security Partners</h4>
+        <p>Cybersecurity specialists ensuring enterprise-grade protection across all deployments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== CTA / CONTACT ===== -->
 <section class="cta-section" id="contact">
   <div class="container">
     <div class="cta-inner fade-up">
+      <img src="newpics/identifying-and-resolving-nexalytics.png" alt="Identifying and Resolving Customer Pain Points with Nexalytics" style="max-width:600px; width:100%; border-radius:16px; margin-bottom:36px; box-shadow:0 12px 40px rgba(15,27,61,0.1);">
       <p class="section-label" style="color:var(--amber);">Get Started</p>
       <h2 class="section-title">Ready to Transform Your Operations?</h2>
-      <p>Let's discuss how IoT, AI Vision, and edge intelligence can solve your real business challenges — with measurable ROI.</p>
+      <p>Let's discuss how our technology solutions&mdash;from IoT and AI/ML to voice analysis and industrial robotics&mdash;can solve your real business challenges with measurable ROI.</p>
       <a href="https://www.nexalyticsdtx.com" target="_blank" class="cta-link">
         Visit nexalyticsdtx.com <span>&#8594;</span>
       </a>
@@ -872,14 +1330,15 @@ body {
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="logo.jpg" alt="Nexalytics DTX">
-        <span>NEXALYTICS DTX</span>
+        <img src="newpics/rectangle-highres-logo.png" alt="Nexalytics DTX">
       </div>
       <div class="footer-links">
         <a href="#about">About</a>
         <a href="#solutions">Solutions</a>
-        <a href="#iot">IoT</a>
-        <a href="#ai-vision">AI Vision</a>
+        <a href="#tech-hub">Technology Hub</a>
+        <a href="#industries">Industries</a>
+        <a href="#team">Team</a>
+        <a href="#partners">Partners</a>
         <a href="https://www.nexalyticsdtx.com" target="_blank">Website</a>
       </div>
     </div>
@@ -890,13 +1349,11 @@ body {
 </footer>
 
 <script>
-// Navbar scroll effect
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// Mobile menu toggle
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
 hamburger.addEventListener('click', () => {
@@ -906,12 +1363,27 @@ navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
 
-// Scroll animations
+document.querySelectorAll('.tech-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tech-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tech-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panel = document.getElementById('panel-' + tab.dataset.tab);
+    if (panel) {
+      panel.classList.add('active');
+      panel.querySelectorAll('.fade-up').forEach(el => {
+        el.classList.remove('visible');
+        void el.offsetWidth;
+        observer.observe(el);
+      });
+    }
+  });
+});
+
 const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, index) => {
+  entries.forEach(entry => {
     if (entry.isIntersecting) {
-      // Stagger animations for siblings
       const parent = entry.target.parentElement;
       const siblings = parent.querySelectorAll('.fade-up');
       const idx = Array.from(siblings).indexOf(entry.target);
@@ -924,13 +1396,12 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
-      const offset = 80;
+      const offset = 90;
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }
