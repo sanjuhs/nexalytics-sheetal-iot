@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexalytics DTX — Think Digital | Technology Solutions</title>
-<link rel="icon" type="image/png" href="newpics/square-higres-logo.png">
+<link rel="icon" type="image/png" href="images/square-higres-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -105,8 +105,10 @@ body {
 
 .hero-circuit {
   position: absolute; top: 10%; right: 5%; width: 400px; height: 400px;
+  max-width: 60vw; max-height: 60vw;
   opacity: 0.05; border: 2px solid var(--amber);
   border-radius: 50%; animation: circuitPulse 6s ease-in-out infinite;
+  pointer-events: none;
 }
 .hero-circuit::before {
   content: ''; position: absolute; top: 15%; left: 15%; right: 15%; bottom: 15%;
@@ -119,13 +121,18 @@ body {
 }
 
 .hero-content {
-  position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;
-  padding: 120px 24px 80px; display: grid; grid-template-columns: 1.1fr 0.9fr;
-  gap: 60px; align-items: center;
+  position: relative; z-index: 2; max-width: 1200px; width: 100%; margin: 0 auto;
+  padding: 120px 24px 80px; display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: "text visual" "text stats";
+  gap: 32px 60px; box-sizing: border-box;
 }
+.hero-text { min-width: 0; grid-area: text; align-self: center; }
 .hero-text h1 {
   font-family: 'Outfit', sans-serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem);
   font-weight: 800; line-height: 1.1; color: var(--navy); margin-bottom: 8px;
+  overflow-wrap: break-word;
 }
 .hero-text h1 .highlight {
   background: linear-gradient(135deg, var(--amber), var(--amber-light));
@@ -158,8 +165,9 @@ body {
 .btn-secondary:hover { background: var(--navy-mid); box-shadow: 0 8px 30px rgba(15, 27, 61, 0.25); }
 
 .hero-visual {
-  position: relative; display: flex; align-items: center; justify-content: center;
+  grid-area: visual; position: relative; display: flex; align-items: center; justify-content: center;
 }
+.hero-stats-inner { grid-area: stats; }
 .hero-logo-wrap {
   position: relative; width: 380px; height: 380px;
   display: flex; align-items: center; justify-content: center;
@@ -184,20 +192,19 @@ body {
 .hero-logo-ring:nth-child(2)::before { background: var(--teal); box-shadow: 0 0 20px var(--teal); }
 @keyframes ringRotate { to { transform: rotate(360deg); } }
 
-.hero-stats {
-  position: relative; z-index: 2; max-width: 1200px; margin: -40px auto 0; padding: 0 24px;
-}
 .stats-bar {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px;
   background: rgba(15,27,61,0.04); border-radius: 16px; overflow: hidden;
-  border: 1px solid var(--gray-100);
+  border: 1px solid var(--gray-100); width: 100%;
 }
 .stat-item {
-  padding: 32px 24px; text-align: center; background: var(--white);
+  padding: 22px 16px; text-align: center; background: var(--white);
+  min-width: 0;
 }
 .stat-number {
   font-family: 'Outfit', sans-serif; font-size: 2rem;
   font-weight: 800; color: var(--amber); margin-bottom: 4px;
+  line-height: 1.1; word-break: break-word;
 }
 .stat-label { font-size: 0.82rem; color: var(--gray-600); font-weight: 400; letter-spacing: 0.5px; }
 
@@ -616,13 +623,16 @@ body {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-  .hero-content { grid-template-columns: 1fr; text-align: center; padding-top: 140px; }
+  .hero-content {
+    grid-template-columns: 1fr;
+    grid-template-areas: "visual" "text" "stats";
+    text-align: center; padding-top: 140px;
+  }
   .hero-desc { margin: 0 auto 40px; }
   .hero-actions { justify-content: center; }
-  .hero-visual { order: -1; }
   .hero-logo-wrap { width: 280px; height: 280px; }
   .hero-logo-wrap img { width: 220px; height: 220px; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .about-grid { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: repeat(2, 1fr); }
   .solutions-grid { grid-template-columns: repeat(2, 1fr); }
@@ -644,10 +654,24 @@ body {
     padding: 24px; gap: 20px; border-bottom: 1px solid rgba(232,148,46,0.1);
     z-index: 999;
   }
-  .hero-content { padding-top: 120px; gap: 40px; }
+  .hero { min-height: auto; }
+  .hero-content {
+    grid-template-columns: 1fr;
+    grid-template-areas: "visual" "text" "stats";
+    padding: 110px 24px 60px; gap: 24px;
+  }
+  .hero-text h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+  .hero-tagline { letter-spacing: 2px; margin-bottom: 16px; }
+  .hero-desc { font-size: 1rem; margin-bottom: 28px; }
+  .hero-actions { gap: 12px; }
+  .btn-primary, .btn-secondary { padding: 12px 24px; font-size: 0.9rem; }
   .hero-logo-wrap { width: 220px; height: 220px; }
   .hero-logo-wrap img { width: 170px; height: 170px; }
-  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .hero-circuit { top: 4%; right: -10%; }
+  .stats-bar { grid-template-columns: 1fr; border-radius: 14px; }
+  .stat-item { padding: 22px 12px; }
+  .stat-number { font-size: 1.5rem; }
+  .stat-label { font-size: 0.75rem; letter-spacing: 0.3px; }
   .why-grid { grid-template-columns: 1fr; }
   .solutions-grid { grid-template-columns: 1fr; }
   .edgehub-grid { grid-template-columns: 1fr; }
@@ -664,12 +688,24 @@ body {
 }
 @media (max-width: 480px) {
   .stats-bar { grid-template-columns: 1fr; }
+  .stat-item { padding: 18px 8px; }
+  .stat-number { font-size: 1.25rem; }
+  .stat-label { font-size: 0.7rem; line-height: 1.35; }
   .app-grid { grid-template-columns: 1fr; }
   .partners-grid { grid-template-columns: 1fr; }
+  .hero-content { padding: 100px 24px 48px; }
+  .hero-text h1 { font-size: clamp(1.85rem, 9vw, 2.2rem); }
+  .hero-tagline { font-size: 0.85rem; letter-spacing: 2px; }
   .hero-logo-wrap { width: 180px; height: 180px; }
   .hero-logo-wrap img { width: 140px; height: 140px; }
   .tech-tabs { flex-direction: column; align-items: stretch; }
   .tech-benefits { grid-template-columns: 1fr; }
+}
+@media (max-width: 360px) {
+  .stats-bar { grid-template-columns: 1fr; }
+  .stat-item { padding: 16px 12px; }
+  .hero-content { padding: 96px 14px 40px; }
+  .hero-text h1 { font-size: 1.75rem; }
 }
 </style>
 </head>
@@ -679,7 +715,7 @@ body {
 <nav class="nav" id="navbar">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <img src="newpics/rectangle-highres-logo.png" alt="Nexalytics DTX Logo">
+      <img src="images/rectangle-highres-logo.png" alt="Nexalytics DTX Logo">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#solutions">Solutions</a></li>
@@ -716,27 +752,27 @@ body {
       <div class="hero-logo-wrap">
         <div class="hero-logo-ring"></div>
         <div class="hero-logo-ring"></div>
-        <img src="newpics/square-higres-logo.png" alt="Nexalytics DTX">
+        <img src="images/square-higres-logo.png" alt="Nexalytics DTX">
       </div>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div class="stats-bar">
-      <div class="stat-item">
-        <div class="stat-number">IoT</div>
-        <div class="stat-label">Connected Ecosystems</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">AI / ML</div>
-        <div class="stat-label">Intelligent Solutions</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">Voice</div>
-        <div class="stat-label">Speech Intelligence</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">Robotics</div>
-        <div class="stat-label">Industrial Automation</div>
+    <div class="hero-stats-inner">
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-number">IoT</div>
+          <div class="stat-label">Connected Ecosystems</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">AI / ML</div>
+          <div class="stat-label">Intelligent Solutions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Voice</div>
+          <div class="stat-label">Speech Intelligence</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Robotics</div>
+          <div class="stat-label">Industrial Automation</div>
+        </div>
       </div>
     </div>
   </div>
@@ -747,7 +783,7 @@ body {
   <div class="container">
     <div class="about-grid">
       <div class="about-image fade-up">
-        <img src="team.png" alt="Nexalytics DTX Team">
+        <img src="images/team.png" alt="Nexalytics DTX Team">
       </div>
       <div class="fade-up">
         <p class="section-label">About Nexalytics DTX</p>
@@ -850,8 +886,8 @@ body {
     </div>
 
     <div class="painpoints-banner fade-up">
-      <img src="newpics/customer-painpoints-chart.png" alt="Customer Pain Points Analysis">
-      <img src="newpics/uncover-customer-insigths.png" alt="Uncover Your Customer Insights">
+      <img src="images/customer-painpoints-chart.png" alt="Customer Pain Points Analysis">
+      <img src="images/uncover-customer-insigths.png" alt="Uncover Your Customer Insights">
     </div>
   </div>
 </section>
@@ -866,7 +902,7 @@ body {
     </div>
 
     <div class="iot-arch-img fade-up">
-      <img src="iot-architecture.png" alt="Typical IoT Architecture - Application Layer, Network Layer, Perception Layer">
+      <img src="images/iot-architecture.png" alt="Typical IoT Architecture - Application Layer, Network Layer, Perception Layer">
     </div>
 
     <h3 class="edgehub-title fade-up">EdgeHub Features</h3>
@@ -908,7 +944,7 @@ body {
     <div class="usecase-grid">
       <div class="uc-card fade-up">
         <div class="uc-card-img">
-          <img src="device-management.png" alt="Remote Edge Device Management">
+          <img src="images/device-management.png" alt="Remote Edge Device Management">
         </div>
         <div class="uc-card-body">
           <h4>Remote Edge Device Management</h4>
@@ -917,7 +953,7 @@ body {
       </div>
       <div class="uc-card fade-up">
         <div class="uc-card-img">
-          <img src="facility-monitoring.png" alt="Wastewater Plant Monitoring">
+          <img src="images/facility-monitoring.png" alt="Wastewater Plant Monitoring">
         </div>
         <div class="uc-card-body">
           <h4>Wastewater Plant Remote Monitoring</h4>
@@ -926,7 +962,7 @@ body {
       </div>
       <div class="uc-card fade-up">
         <div class="uc-card-img">
-          <img src="ev-charger.png" alt="Dynamic EV Charger Management">
+          <img src="images/ev-charger.png" alt="Dynamic EV Charger Management">
         </div>
         <div class="uc-card-body">
           <h4>Dynamic EV Charger Management</h4>
@@ -947,8 +983,8 @@ body {
     </div>
     <div class="ai-grid">
       <div class="ai-images fade-up">
-        <img src="ai-safety.png" alt="AI Vision - Person Detection near Forklift">
-        <img src="ai-detect.png" alt="AI Vision - PPE Detection: Helmet and Vest">
+        <img src="images/ai-safety.png" alt="AI Vision - Person Detection near Forklift">
+        <img src="images/ai-detect.png" alt="AI Vision - PPE Detection: Helmet and Vest">
       </div>
       <div class="ai-text-content fade-up">
         <p>Turn your existing CCTV into a smart safety system. Our AI Vision solutions detect safety hazards in real-time across manufacturing plants, warehouses, and industrial environments.</p>
@@ -976,7 +1012,7 @@ body {
     </div>
 
     <div class="tech-hub-banner fade-up">
-      <img src="newpics/customer-painpoints-ai-workflow.png" alt="Customer Pain Points AI Workflow">
+      <img src="images/customer-painpoints-ai-workflow.png" alt="Customer Pain Points AI Workflow">
     </div>
 
     <!-- Tabs: IoT first, Cybersecurity LAST -->
@@ -1314,7 +1350,7 @@ body {
 <section class="cta-section" id="contact">
   <div class="container">
     <div class="cta-inner fade-up">
-      <img src="newpics/identifying-and-resolving-nexalytics.png" alt="Identifying and Resolving Customer Pain Points with Nexalytics" style="max-width:600px; width:100%; border-radius:16px; margin-bottom:36px; box-shadow:0 12px 40px rgba(15,27,61,0.1);">
+      <img src="images/identifying-and-resolving-nexalytics.png" alt="Identifying and Resolving Customer Pain Points with Nexalytics" style="max-width:600px; width:100%; border-radius:16px; margin-bottom:36px; box-shadow:0 12px 40px rgba(15,27,61,0.1);">
       <p class="section-label" style="color:var(--amber);">Get Started</p>
       <h2 class="section-title">Ready to Transform Your Operations?</h2>
       <p>Let's discuss how our technology solutions&mdash;from IoT and AI/ML to voice analysis and industrial robotics&mdash;can solve your real business challenges with measurable ROI.</p>
@@ -1330,7 +1366,7 @@ body {
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="newpics/rectangle-highres-logo.png" alt="Nexalytics DTX">
+        <img src="images/rectangle-highres-logo.png" alt="Nexalytics DTX">
       </div>
       <div class="footer-links">
         <a href="#about">About</a>
