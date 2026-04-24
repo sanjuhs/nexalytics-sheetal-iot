@@ -330,9 +330,60 @@ body {
   color: var(--white); margin-bottom: 10px;
 }
 .sol-card p { font-size: 0.88rem; line-height: 1.65; color: var(--gray-400); }
+.sol-card { cursor: pointer; }
 .sol-card:nth-child(4) .sol-icon,
 .sol-card:nth-child(5) .sol-icon { background: rgba(26,154,170,0.15); }
 .sol-card:nth-child(6) .sol-icon { background: rgba(46,204,113,0.12); }
+
+/* Solution Detail Modal */
+.sol-modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 10000;
+  background: rgba(15,27,61,0.7); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 24px;
+}
+.sol-modal-overlay.active { display: flex; }
+.sol-modal {
+  background: var(--white); border-radius: 20px; max-width: 860px; width: 100%;
+  max-height: 90vh; overflow-y: auto; position: relative;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25); animation: modalIn 0.3s ease;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(24px) scale(0.97); } to { opacity: 1; transform: none; } }
+.sol-modal-close {
+  position: sticky; top: 16px; float: right; margin: 16px 16px 0 0;
+  width: 40px; height: 40px; border-radius: 50%; border: none;
+  background: var(--off-white); cursor: pointer; font-size: 1.3rem;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--navy); transition: all 0.3s; z-index: 2;
+}
+.sol-modal-close:hover { background: var(--amber); color: var(--white); }
+.sol-modal-body { padding: 40px 48px 48px; }
+.sol-modal-body h2 {
+  font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800;
+  color: var(--navy); margin-bottom: 16px;
+}
+.sol-modal-body h3 {
+  font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 700;
+  color: var(--navy); margin-top: 24px; margin-bottom: 10px;
+}
+.sol-modal-body p { font-size: 0.95rem; line-height: 1.7; color: var(--gray-600); margin-bottom: 12px; }
+.sol-modal-body ul { padding-left: 20px; margin-bottom: 16px; }
+.sol-modal-body li { font-size: 0.92rem; line-height: 1.7; color: var(--gray-600); margin-bottom: 6px; }
+.sol-modal-body img {
+  width: 100%; border-radius: 14px; margin: 20px 0;
+  box-shadow: 0 8px 30px rgba(15,27,61,0.08);
+}
+.sol-modal-body .sol-modal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.sol-modal-body .sol-modal-tag {
+  display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.78rem;
+  font-weight: 600; background: rgba(232,148,46,0.1); color: var(--amber);
+  border: 1px solid rgba(232,148,46,0.2);
+}
+.sol-modal-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.sol-modal-img-grid img { margin: 0; }
+@media (max-width: 768px) {
+  .sol-modal-body { padding: 28px 24px 32px; }
+  .sol-modal-img-grid { grid-template-columns: 1fr; }
+}
 
 .painpoints-banner {
   margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;
@@ -526,25 +577,28 @@ body {
 
 /* ===== MANAGEMENT TEAM ===== */
 .team-section { background: var(--off-white); }
-.team-intro { text-align: center; max-width: 640px; margin: 0 auto 48px; }
-.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.team-intro { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px; max-width: 900px; margin: 0 auto; }
 .team-card {
-  text-align: center; padding: 40px 28px 32px; border-radius: 16px;
+  text-align: center; padding: 40px 32px 36px; border-radius: 16px;
   background: var(--white); border: 1px solid var(--gray-100); transition: all 0.4s;
 }
 .team-card:hover { box-shadow: 0 12px 40px rgba(15,27,61,0.08); transform: translateY(-4px); border-color: var(--amber); }
 .team-avatar {
-  width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 20px;
-  display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--navy), var(--navy-light));
-  font-size: 2rem; color: var(--amber);
+  width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 20px;
+  overflow: hidden; border: 3px solid var(--amber);
+  box-shadow: 0 4px 16px rgba(15,27,61,0.10);
+}
+.team-avatar img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
 .team-card h4 {
-  font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 700;
+  font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 700;
   color: var(--navy); margin-bottom: 4px;
 }
-.team-card .team-role { font-size: 0.82rem; color: var(--amber); font-weight: 600; margin-bottom: 12px; }
-.team-card p { font-size: 0.85rem; line-height: 1.6; color: var(--gray-600); }
+.team-card .team-role { font-size: 0.85rem; color: var(--amber); font-weight: 600; margin-bottom: 14px; }
+.team-card p { font-size: 0.85rem; line-height: 1.7; color: var(--gray-600); }
+.team-card .team-credentials { font-size: 0.8rem; line-height: 1.6; color: var(--gray-400); margin-top: 12px; font-style: italic; }
 
 /* ===== PARTNERS ===== */
 .partners-section {
@@ -589,15 +643,40 @@ body {
   border-radius: 50%; background: radial-gradient(circle, rgba(232,148,46,0.06), transparent 70%);
 }
 .cta-inner {
-  position: relative; z-index: 2; text-align: center; max-width: 640px; margin: 0 auto;
+  position: relative; z-index: 2; text-align: center; max-width: 800px; margin: 0 auto;
 }
 .cta-inner .section-title { color: var(--navy); margin-bottom: 16px; }
-.cta-inner p { color: var(--gray-600); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
-.cta-link {
-  color: var(--amber); font-size: 1.15rem; font-weight: 700;
-  text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
+.cta-inner > p { color: var(--gray-600); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
+.contact-offices {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  text-align: left; margin: 48px 0 40px;
 }
-.cta-link:hover { color: var(--amber-light); gap: 14px; }
+.contact-office-card { display: flex; flex-direction: column; align-items: flex-start; }
+.contact-office-card .flag-img {
+  width: 160px; height: 107px; object-fit: cover; border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12); margin-bottom: 20px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.contact-office-card h3 {
+  font-size: 1.2rem; font-weight: 800; color: var(--navy);
+  margin-bottom: 8px;
+}
+.contact-office-card p {
+  color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin: 0;
+}
+.contact-office-card .contact-phone {
+  margin-top: 12px; font-weight: 600; color: var(--navy);
+}
+.contact-email-line {
+  font-size: 1rem; color: var(--gray-600); margin-top: 8px;
+}
+.contact-email-line a {
+  color: var(--amber); font-weight: 700; text-decoration: none;
+}
+.contact-email-line a:hover { text-decoration: underline; }
+@media (max-width: 600px) {
+  .contact-offices { grid-template-columns: 1fr; gap: 36px; }
+}
 
 /* ===== FOOTER ===== */
 .footer {
@@ -819,6 +898,9 @@ body {
       <p class="section-label">Why Choose Us</p>
       <h2 class="section-title">Why Nexalytics DTX</h2>
     </div>
+    <div class="why-banner fade-up" style="max-width:800px; margin:0 auto 48px; border-radius:16px; overflow:hidden; box-shadow:0 12px 40px rgba(15,27,61,0.08);">
+      <img src="images/Why-us.png" alt="Why Nexalytics DTX" style="width:100%; display:block;">
+    </div>
     <div class="why-grid">
       <div class="why-card fade-up">
         <div class="why-icon icon-1">&#x1F4AC;</div>
@@ -854,50 +936,243 @@ body {
       <p class="section-desc">From cloud platforms to factory floors, our solutions are fine-tuned to address real customer pain points across industries. IoT and AI Vision are at the heart of what we deliver.</p>
     </div>
     <div class="solutions-grid">
-      <div class="sol-card fade-up">
+      <div class="sol-card fade-up" onclick="openSolModal('modal-iot')">
         <div class="sol-icon">&#x1F310;</div>
         <h3>IoT Customisation Solutions</h3>
         <p>End-to-end IoT architecture from perception layer sensors through network gateways to cloud applications&mdash;enabling real-time monitoring, control, and predictive maintenance.</p>
       </div>
-      <div class="sol-card fade-up">
+      <div class="sol-card fade-up" onclick="openSolModal('modal-ai-safety')">
         <div class="sol-icon">&#x1F441;</div>
-        <h3>AI Vision for Safety</h3>
+        <h3>AI Based Smart Safety Solution</h3>
         <p>Turn your existing CCTV into a smart safety system. Detect PPE compliance, proximity hazards, and zone violations in real-time across manufacturing environments.</p>
       </div>
-      <div class="sol-card fade-up">
+      <div class="sol-card fade-up" onclick="openSolModal('modal-digital')">
         <div class="sol-icon">&#x2699;</div>
         <h3>Digital Transformation &amp; Analytics</h3>
         <p>Modernize operations with data-driven insights, process automation, and digital-first strategies for measurable ROI.</p>
       </div>
-      <div class="sol-card fade-up">
+      <div class="sol-card fade-up" onclick="openSolModal('modal-domain-ai')">
         <div class="sol-icon">&#x1F4E1;</div>
         <h3>Domain-Specific AI &amp; IoT</h3>
         <p>Purpose-built AI and IoT architectures tailored to manufacturing, logistics, and facility management needs.</p>
       </div>
-      <div class="sol-card fade-up">
+      <div class="sol-card fade-up" onclick="openSolModal('modal-cyber')">
         <div class="sol-icon">&#x1F3AF;</div>
-        <h3>Customer Pain Point Solutions</h3>
-        <p>Fine-tuned to address end customer pain points with practical, measurable outcomes and strong return on investment.</p>
+        <h3>Cybersecurity Solutions</h3>
+        <p>Fine-tuned to address end cybersecurity challenges with practical, measurable outcomes and strong return on investment.</p>
       </div>
-      <div class="sol-card fade-up">
+      <div class="sol-card fade-up" onclick="openSolModal('modal-accelerators')">
         <div class="sol-icon">&#x1F3ED;</div>
         <h3>Industry-Specific Accelerators</h3>
-        <p>Pre-built frameworks for semiconductors, electronics, solar, and more&mdash;reducing time to deployment significantly.</p>
+        <p>Industrial Robotics, AI-Cyber, Solar/Green Energy Monitoring, Freezer Monitoring, and Solutions to Contact Centers.</p>
       </div>
     </div>
-
-    <!-- <div class="painpoints-banner fade-up">
-      <img src="images/customer-painpoints-chart.png" alt="Customer Pain Points Analysis">
-      <img src="images/uncover-customer-insigths.png" alt="Uncover Your Customer Insights">
-    </div> -->
   </div>
 </section>
+
+<!-- ===== SOLUTION DETAIL MODALS ===== -->
+
+<!-- Modal: IoT Customisation Solutions -->
+<div class="sol-modal-overlay" id="modal-iot">
+  <div class="sol-modal">
+    <button class="sol-modal-close" onclick="closeSolModal('modal-iot')">&times;</button>
+    <div class="sol-modal-body">
+      <h2>IoT Customisation Solutions</h2>
+      <p>End-to-end IoT architecture from perception layer sensors through network gateways to cloud applications&mdash;enabling real-time monitoring, control, and predictive maintenance.</p>
+      <h3>Typical IoT Architecture</h3>
+      <img src="images/iot-architecture.png" alt="Typical IoT Architecture">
+      <p>Our IoT solutions span the complete stack: perception layer sensors, edge gateways, network infrastructure, and cloud analytics platforms&mdash;all customized to your operational needs.</p>
+      <div class="sol-modal-tags">
+        <span class="sol-modal-tag">Connected Devices</span>
+        <span class="sol-modal-tag">Predictive Maintenance</span>
+        <span class="sol-modal-tag">Smart Monitoring</span>
+        <span class="sol-modal-tag">Custom Integrations</span>
+        <span class="sol-modal-tag">Edge to Cloud</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: AI Based Smart Safety Solution -->
+<div class="sol-modal-overlay" id="modal-ai-safety">
+  <div class="sol-modal">
+    <button class="sol-modal-close" onclick="closeSolModal('modal-ai-safety')">&times;</button>
+    <div class="sol-modal-body">
+      <h2>AI Based Smart Safety Solution</h2>
+      <p>Turn your existing CCTV into a smart safety system. Our NexVision platform detects safety hazards in real-time across manufacturing plants, warehouses, and industrial environments.</p>
+
+      <h3>NexVision Safety Monitoring Capabilities</h3>
+
+      <h3>Workplace Safety &amp; Compliance</h3>
+      <ul>
+        <li>Fire and Smoke Detection</li>
+        <li>PPE Compliance Detection</li>
+        <li>Missing Safety Signage Identification</li>
+        <li>Unattended Object Detection</li>
+      </ul>
+
+      <h3>Security &amp; Loss Prevention</h3>
+      <ul>
+        <li>Material Theft Detection</li>
+      </ul>
+
+      <h3>Traffic &amp; Vehicle Analytics</h3>
+      <ul>
+        <li>Vehicle Overspeed Detection</li>
+        <li>Vehicle Classification &amp; Counting</li>
+        <li>Automatic License Plate Recognition (ALPR)</li>
+      </ul>
+
+      <h3>Unique Benefits of NexVision</h3>
+      <p>NexVision is suitable for a wide array of industries.</p>
+      <img src="images/nex-vison-benefits.png" alt="NexVision Benefits">
+
+      <div class="sol-modal-img-grid">
+        <img src="images/ai-safety.png" alt="AI Vision - Person Detection near Forklift">
+        <img src="images/ai-detect.png" alt="AI Vision - PPE Detection">
+      </div>
+      <img src="images/see-danger.png" alt="NexVision - See Danger Before It Strikes">
+
+      <div class="sol-modal-tags">
+        <span class="sol-modal-tag">PPE Detection</span>
+        <span class="sol-modal-tag">Proximity Alerts</span>
+        <span class="sol-modal-tag">Zone Monitoring</span>
+        <span class="sol-modal-tag">Real-time Alerts</span>
+        <span class="sol-modal-tag">Existing CCTV</span>
+        <span class="sol-modal-tag">Fire &amp; Smoke</span>
+        <span class="sol-modal-tag">ALPR</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Digital Transformation & Analytics -->
+<div class="sol-modal-overlay" id="modal-digital">
+  <div class="sol-modal">
+    <button class="sol-modal-close" onclick="closeSolModal('modal-digital')">&times;</button>
+    <div class="sol-modal-body">
+      <h2>Digital Transformation &amp; Analytics</h2>
+      <p>Modernize operations with data-driven insights, process automation, and digital-first strategies for measurable ROI.</p>
+      <img src="images/customer-painpoints-ai-workflow.png" alt="Customer Pain Points AI Workflow">
+      <h3>Key Capabilities</h3>
+      <ul>
+        <li>Data-driven insights and business intelligence</li>
+        <li>Process automation and workflow optimization</li>
+        <li>Digital-first strategy development</li>
+        <li>Cloud migration and modernization</li>
+        <li>Customer experience transformation</li>
+      </ul>
+      <div class="sol-modal-tags">
+        <span class="sol-modal-tag">Analytics</span>
+        <span class="sol-modal-tag">Automation</span>
+        <span class="sol-modal-tag">Cloud</span>
+        <span class="sol-modal-tag">ROI-Driven</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Domain-Specific AI & IoT -->
+<div class="sol-modal-overlay" id="modal-domain-ai">
+  <div class="sol-modal">
+    <button class="sol-modal-close" onclick="closeSolModal('modal-domain-ai')">&times;</button>
+    <div class="sol-modal-body">
+      <h2>Domain-Specific AI &amp; IoT</h2>
+      <p>Purpose-built AI and IoT architectures tailored to manufacturing, logistics, and facility management needs.</p>
+
+      <h3>Comprehensive Device Management from Edge to Cloud</h3>
+      <img src="images/device-management.png" alt="Device Management - Edge to Cloud">
+      <ul>
+        <li><strong>Streamlined Device Provisioning:</strong> Integrates with edge tools to simplify connecting new devices.</li>
+        <li><strong>Remote Monitoring &amp; Control:</strong> Real-time monitoring of device status and control capabilities from anywhere.</li>
+        <li><strong>Over-the-Air (OTA) Updates:</strong> Seamless deployment of firmware and software updates remotely.</li>
+        <li><strong>Edge-to-Cloud Security:</strong> Robust security measures across edge devices to the cloud.</li>
+        <li><strong>Role-Based Access Control:</strong> Precise control over user permissions to devices and cloud services.</li>
+        <li><strong>3rd Party Integration:</strong> APIs for data plugin and forwarding, enabling interoperability.</li>
+      </ul>
+      <div class="sol-modal-tags">
+        <span class="sol-modal-tag">Edge Computing</span>
+        <span class="sol-modal-tag">Device Management</span>
+        <span class="sol-modal-tag">OTA Updates</span>
+        <span class="sol-modal-tag">Manufacturing</span>
+        <span class="sol-modal-tag">Logistics</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Cybersecurity Solutions -->
+<div class="sol-modal-overlay" id="modal-cyber">
+  <div class="sol-modal">
+    <button class="sol-modal-close" onclick="closeSolModal('modal-cyber')">&times;</button>
+    <div class="sol-modal-body">
+      <h2>Cybersecurity Solutions</h2>
+      <p>Fine-tuned to address end-to-end cybersecurity challenges with practical, measurable outcomes and strong return on investment.</p>
+      <img src="images/solutions/ai-cyber.png" alt="AI Cyber Security">
+      <h3>Key Capabilities</h3>
+      <ul>
+        <li>Threat detection and response</li>
+        <li>Vulnerability assessment and management</li>
+        <li>Security operations center (SOC) services</li>
+        <li>Compliance and governance frameworks</li>
+        <li>Zero trust architecture implementation</li>
+        <li>Incident response and recovery</li>
+      </ul>
+      <div class="sol-modal-tags">
+        <span class="sol-modal-tag">Threat Detection</span>
+        <span class="sol-modal-tag">Compliance</span>
+        <span class="sol-modal-tag">Zero Trust</span>
+        <span class="sol-modal-tag">SOC</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Industry-Specific Accelerators -->
+<div class="sol-modal-overlay" id="modal-accelerators">
+  <div class="sol-modal">
+    <button class="sol-modal-close" onclick="closeSolModal('modal-accelerators')">&times;</button>
+    <div class="sol-modal-body">
+      <h2>Industry-Specific Accelerators</h2>
+      <p>Pre-built frameworks and solutions designed to accelerate deployment across key industrial verticals.</p>
+
+      <h3>Industrial Robotics</h3>
+      <img src="images/solutions/industrail-robotics.png" alt="Industrial Robotics">
+      <p>Advanced robotic systems and automation solutions for manufacturing, assembly, and material handling operations.</p>
+
+      <h3>AI &ndash; Cyber</h3>
+      <img src="images/solutions/ai-cyber.png" alt="AI Cyber Solutions">
+      <p>AI-powered cybersecurity solutions combining machine learning with threat intelligence for proactive defense.</p>
+
+      <h3>Solar / Green Energy &ndash; Monitoring</h3>
+      <img src="images/solutions/solar-green-energy.png" alt="Solar Green Energy Monitoring">
+      <p>Comprehensive monitoring solutions for solar installations and green energy infrastructure, ensuring optimal performance and ROI.</p>
+
+      <h3>Freezer Monitoring</h3>
+      <img src="images/solutions/freezer-monitoring.png" alt="Freezer Monitoring">
+      <p>Real-time temperature and environmental monitoring for cold chain logistics, food storage, and pharmaceutical facilities.</p>
+
+      <h3>Solutions to Contact Centers</h3>
+      <img src="images/solutions/solutio-to-contactsenters.png" alt="Solutions to Contact Centers">
+      <p>AI-based voice analyzers and intelligent automation solutions transforming contact center operations with real-time insights and quality monitoring.</p>
+
+      <div class="sol-modal-tags">
+        <span class="sol-modal-tag">Industrial Robotics</span>
+        <span class="sol-modal-tag">AI-Cyber</span>
+        <span class="sol-modal-tag">Solar Energy</span>
+        <span class="sol-modal-tag">Cold Chain</span>
+        <span class="sol-modal-tag">Contact Centers</span>
+        <span class="sol-modal-tag">Voice Analytics</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== IOT FOR MANUFACTURING ===== -->
 <section class="iot-section section-pad" id="iot">
   <div class="container">
     <div class="iot-hero-text fade-up">
-      <p class="section-label">IoT for Manufacturing</p>
+      <p class="section-label">Typical iOT Architecture</p>
       <h2 class="section-title">Smart Manufacturing with Edge Intelligence</h2>
       <p class="section-desc">End-to-end IoT architecture from perception layer sensors through network gateways to cloud applications&mdash;enabling real-time monitoring, control, and analytics.</p>
     </div>
@@ -906,8 +1181,8 @@ body {
       <img src="images/iot-architecture.png" alt="Typical IoT Architecture - Application Layer, Network Layer, Perception Layer">
     </div>
 
-    <h3 class="edgehub-title fade-up">EdgeHub Features</h3>
-    <p class="edgehub-sub fade-up">Comprehensive device management from edge to cloud</p>
+    <h3 class="edgehub-title fade-up">Comprehensive Device Management from Edge to Cloud</h3>
+    <p class="edgehub-sub fade-up">Streamlined provisioning, remote monitoring, OTA updates, and secure integrations</p>
     <div class="edgehub-grid">
       <div class="eh-card fade-up">
         <div class="eh-icon">&#x1F527;</div>
@@ -1292,22 +1567,20 @@ body {
     </div>
     <div class="team-grid">
       <div class="team-card fade-up">
-        <div class="team-avatar">&#x1F464;</div>
-        <h4>Founding Team</h4>
-        <p class="team-role">Strategic Leadership</p>
-        <p>Visionary leadership driving the company's mission to bring the right technology to the right problem, with measurable outcomes.</p>
+        <div class="team-avatar"><img src="images/satish.png" alt="Satish Allampalli"></div>
+        <h4>Satish Allampalli</h4>
+        <p class="team-role">Founder &amp; CEO</p>
+        <p>Satish is a seasoned technology business leader with 35+ years of experience across IoT, SCADA, UCaaS, CCaaS, data analytics, digital transformation, and enterprise technology. He is responsible for strategy, growth, technology vision, operations, and governance, ensuring NDTX delivers sustainable value to clients and partners.</p>
+        <p style="margin-top:10px;">He brings a strong track record of building scalable solutions, leading cross-functional teams, and driving measurable business outcomes. Satish held senior positions at ABB and Advantech-Singapore and is an industry leader with significant influence and contributions to Automation.SG, SG Tech SMF and other industry bodies. He led the successful expansion of Advantech Singapore business into ASEAN and India.</p>
+        <p class="team-credentials">Electronics &amp; Communication Engineer | Expertise in SCADA, Industrial Automation, IoT &amp; Partner Ecosystem Development</p>
       </div>
       <div class="team-card fade-up">
-        <div class="team-avatar">&#x1F4BB;</div>
-        <h4>Technology Team</h4>
-        <p class="team-role">Engineering &amp; Innovation</p>
-        <p>Expert technologists specializing in AI/ML, IoT, voice analysis, and cloud architecture, delivering enterprise-grade solutions.</p>
-      </div>
-      <div class="team-card fade-up">
-        <div class="team-avatar">&#x1F91D;</div>
-        <h4>Advisory Board</h4>
-        <p class="team-role">Industry Expertise</p>
-        <p>Seasoned advisors from manufacturing, finance, and technology sectors guiding our strategic direction and partnerships.</p>
+        <div class="team-avatar"><img src="images/shashi.png" alt="Shashishekara Anantharamaiah"></div>
+        <h4>Shashishekara Anantharamaiah (Shashi)</h4>
+        <p class="team-role">Chief Technology Officer</p>
+        <p>Shashi is the CTO at Nexalytics DTX, responsible for shaping the organization's technology strategy, platform architecture, and engineering excellence. With over 35+ years of global experience, he brings deep expertise in building secure, resilient, and scalable technology platforms for complex, high-reliability environments.</p>
+        <p style="margin-top:10px;">He has held senior technology and leadership roles across leading global organizations including Siemens, ABB, John Holland, Invensys, Westinghouse, Foxboro, and Novell, working across Australia, Europe, the UK, and Asia. At Nexalytics DTX, Shashi leads the convergence of engineering discipline with modern data, analytics, cloud, and real-time intelligence.</p>
+        <p class="team-credentials">Fellow, Institution of Engineers Australia (FIEAust) | Chartered Professional Engineer (CPEng &amp; RPEQ) | PRINCE 2 Practitioner | Lean Six Sigma Black Belt | B.E. (Electronics &amp; Communication), NIT Karnataka</p>
       </div>
     </div>
   </div>
@@ -1351,13 +1624,26 @@ body {
 <section class="cta-section" id="contact">
   <div class="container">
     <div class="cta-inner fade-up">
-      <!-- <img src="images/identifying-and-resolving-nexalytics.png" alt="Identifying and Resolving Customer Pain Points with Nexalytics" style="max-width:600px; width:100%; border-radius:16px; margin-bottom:36px; box-shadow:0 12px 40px rgba(15,27,61,0.1);"> -->
       <p class="section-label" style="color:var(--amber);">Get Started</p>
       <h2 class="section-title">Ready to Transform Your Operations?</h2>
-      <p>Let's discuss how our technology solutions&mdash;from IoT and AI/ML to voice analysis and industrial robotics&mdash;can solve your real business challenges with measurable ROI.</p>
-      <a href="https://www.nexalyticsdtx.com" target="_blank" class="cta-link">
-        Visit nexalyticsdtx.com <span>&#8594;</span>
-      </a>
+      <p>Let&rsquo;s discuss how our technology solutions&mdash;from IoT and AI/ML to voice analysis and industrial robotics&mdash;can solve your real business challenges with measurable ROI.</p>
+
+      <div class="contact-offices">
+        <div class="contact-office-card">
+          <img src="images/flag-singapore.png" alt="Singapore Flag" class="flag-img">
+          <h3>Singapore</h3>
+          <p>#13-55, Blk 228<br>Serangoon Ave-4,<br>Singapore 550228</p>
+          <p class="contact-phone">Contact +65-65196475</p>
+        </div>
+        <div class="contact-office-card">
+          <img src="images/flag-australia.png" alt="Australia Flag" class="flag-img">
+          <h3>Australia</h3>
+          <p>26, Robinson St,<br>Clayton,<br>Victoria 3168 Australia</p>
+          <p class="contact-phone">Contact +61 407 909 823</p>
+        </div>
+      </div>
+
+      <p class="contact-email-line">*Please send in your queries to <a href="mailto:info@nexalyticsdtx.com">info@nexalyticsdtx.com</a></p>
     </div>
   </div>
 </section>
@@ -1386,6 +1672,31 @@ body {
 </footer>
 
 <script>
+function openSolModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeSolModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.sol-modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.sol-modal-overlay.active').forEach(m => {
+      m.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+});
+
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 50);
